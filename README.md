@@ -81,7 +81,7 @@ Una aplicación full stack desarrollada desde cero que permite administrar infor
 ### 1. Clonar repositorio
 ```bash
 git clone https://github.com/augustovillegas/Nodo_FS_sp5_entregablefinal.git
-cd nodo-sprint5-entreglefinal
+cd Nodo_FS_sp5_entregablefinal
 ```
 
 ### 2. Instalar dependencias
@@ -115,7 +115,7 @@ Luego acceder a [http://localhost:3008](http://localhost:3008)
 ## 🧪 Ejecutar Tests
 
 ```bash
-npm test
+npm run test
 ```
 
 Incluye validaciones de reglas backend, estructura de errores y comportamiento esperado de inputs maliciosos.
