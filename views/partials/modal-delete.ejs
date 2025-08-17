@@ -1,0 +1,31 @@
+<div
+  id="delete-modal"
+  class="fixed inset-0 z-50 hidden bg-black bg-opacity-70 flex items-center justify-center px-4"
+  role="dialog"
+  aria-modal="true"
+>
+  <div class="panel max-w-md w-full p-6 relative text-white -mt-10">
+    <h2 class="text-xl font-semibold mb-4 text-red-400">Confirmar eliminación</h2>
+    <p class="mb-6 text-gray-300">
+      ¿Estás seguro que querés eliminar <span id="delete-name" class="font-bold text-white"></span>?
+    </p>
+    <form id="delete-form" method="POST">
+      <input type="hidden" name="_method" value="DELETE" />
+      <div class="flex justify-end gap-4">
+        <button
+          type="button"
+          id="cancel-delete"
+          class="secondary btn-sm"
+        >
+          Cancelar
+        </button>
+        <button
+          type="submit"
+          class="danger btn-sm"
+        >
+          Eliminar
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

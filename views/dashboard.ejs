@@ -1,0 +1,64 @@
+<!-- 🔍 Buscador + Añadir + Exportar CSV (responsive) -->
+<div
+  class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-8"
+>
+  <!-- Buscador -->
+  <form id="search-form" class="w-full sm:flex-1">
+    <div class="search-group">
+      <input
+        id="search-input"
+        type="text"
+        name="q"
+        placeholder="Buscar por nombre, capital, creador..."
+        autocomplete="off"
+        autocapitalize="off"
+        spellcheck="false"
+        inputmode="search"
+        aria-label="Buscar país"
+        value="<%= typeof query !== 'undefined' ? query : '' %>"
+        class="sg-input"
+      />
+      <button type="submit" class="sg-btn">Buscar</button>
+    </div>
+  </form>
+
+  <!-- Acciones -->
+  <div class="flex flex-col sm:flex-row gap-2 w-full sm:w-auto sm:justify-end">
+    <!-- Añadir -->
+    <a
+      href="/api/countries/agregar"
+      class="block w-full sm:inline-block sm:w-auto px-6 py-3 bg-yellow-400 hover:bg-yellow-500 text-black font-semibold rounded transition focus:outline-none focus:ring-2 focus:ring-yellow-400 text-center"
+    >
+      Añadir
+    </a>
+
+    <!-- Exportar CSV -->
+    <a
+      id="export-csv-link"
+      href="/api/countries/export/csv"
+      class="block w-full sm:inline-block sm:w-auto px-6 py-3 bg-slate-400 hover:bg-slate-500 text-black font-semibold rounded transition focus:outline-none focus:ring-2 focus:ring-yellow-400 text-center"
+    >
+      Exportar CSV
+    </a>
+  </div>
+</div>
+
+<!-- Tabla + Paginación -->
+<div id="table-container" class="overflow-hidden">
+  <%- include('partials/table', { countries }) %> <%- include('partials/pagination') %>
+</div>
+
+<!-- Sin resultados -->
+<p id="no-results" class="hidden text-center text-muted mt-4 font-['Roboto']">
+  No hay resultados para el país buscado...
+</p>
+
+<!-- Modales -->
+<%- include('partials/countryModal') %> <%- include('partials/modal-delete') %>
+
+<!-- Scripts -->
+<script src="/js/dashboard-utils.js" defer></script>
+<script src="/js/pagination.js" defer></script>
+<script src="/js/confirm-delete.js" defer></script>
+<script src="/js/country-modal.js" defer></script>
+<script src="/js/export-csv.js" defer></script>

@@ -1,0 +1,158 @@
+<!-- views/informacion.ejs -->
+<div class="container mx-auto px-4 py-6">
+
+  <!-- Encabezado -->
+  <header class="text-center mb-6">   
+    <p class="mt-0 text-gray-300 text-base sm:text-lg max-w-3xl mx-auto">
+      Este panel de administración de países de América nace del
+      <span class="font-semibold text-white">Quinto y último Sprint</span> de la
+      Diplomatura en Diseño Web Full Stack con JavaScript de la
+      <span class="font-semibold text-white">UNCA</span>. Es el
+      <span class="font-semibold text-white">entregable final del Módulo 4 (Node.js)</span>.
+    </p>
+  </header>
+
+  <!-- Cuerpo principal: Story + Tech + Acciones -->
+  <section class="grid md:grid-cols-5 gap-6 items-start">
+
+    <!-- Storytelling / Propósito (col-span 3 en desktop) -->
+    <article class="md:col-span-3">
+      <div class="rounded-2xl border border-white/10 bg-white/5 backdrop-blur-sm p-5">
+        <h2 class="text-xl sm:text-2xl font-semibold text-white mb-3">
+          Propósito del proyecto
+        </h2>
+        <p class="text-gray-200 text-base sm:text-lg">
+          Construir una herramienta de administración clara, rápida y confiable para gestionar
+          <span class="font-semibold text-white">países de América</span>: crear, editar, buscar, filtrar y paginar
+          registros con validaciones robustas y una experiencia de usuario limpia y consistente.
+        </p>
+
+        <!-- Botón GitHub debajo de Propósito -->
+        <div class="mt-6 text-center">
+          <a
+            href="<%= typeof githubUrl !== 'undefined' && githubUrl ? githubUrl : 'https://github.com/augustovillegas/Nodo_FS_sp5_entreglefinal.git' %>"
+            target="_blank"
+            class="inline-flex w-full sm:w-auto items-center justify-center gap-2 bg-yellow-400 hover:bg-yellow-300 text-black font-semibold px-6 py-3 rounded-xl transition"
+            aria-label="Ver código en GitHub"
+          >
+            <i class="ph ph-github-logo text-xl"></i>
+            Ver código en GitHub
+          </a>
+        </div>
+
+        <div class="my-5 h-px bg-gradient-to-r from-transparent via-white/20 to-transparent"></div>
+
+        <h3 class="text-lg sm:text-xl font-semibold text-white mb-2">
+          Enfoque y alcance
+        </h3>
+        <ul class="list-disc list-inside text-gray-200 space-y-2">
+          <li><span class="font-medium text-white">Usabilidad:</span> interfaz sobria, semántica visual coherente y feedback inmediato.</li>
+          <li><span class="font-medium text-white">Escalabilidad:</span> arquitectura modular (controladores, repositorios, validaciones) y patrones consistentes.</li>
+          <li><span class="font-medium text-white">Calidad:</span> reglas de validación reutilizables, manejo de errores centralizado y tests de validación.</li>
+          <li><span class="font-medium text-white">Rendimiento:</span> paginación del lado del servidor y búsquedas eficientes.</li>
+        </ul>
+
+        <div class="mt-5">
+          <h3 class="text-lg sm:text-xl font-semibold text-white mb-2">Funcionalidades destacadas</h3>
+          <div class="grid sm:grid-cols-2 gap-3">
+            <div class="rounded-xl border border-white/10 p-4">
+              <p class="text-gray-200"><span class="font-medium text-white">CRUD</span> de países con confirmaciones antes de acciones críticas.</p>
+            </div>
+            <div class="rounded-xl border border-white/10 p-4">
+              <p class="text-gray-200">Búsqueda y <span class="font-medium text-white">paginación</span> para listas extensas.</p>
+            </div>
+            <div class="rounded-xl border border-white/10 p-4">
+              <p class="text-gray-200">Validaciones de campos y mensajes de error consistentes.</p>
+            </div>
+            <div class="rounded-xl border border-white/10 p-4">
+              <p class="text-gray-200">Vistas EJS responsivas con <span class="font-medium text-white">Tailwind</span> y semántica de botones alineada al proyecto.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- Tecnologías + QR (col-span 2 en desktop) -->
+    <aside class="md:col-span-2 space-y-6">
+
+      <!-- Tecnologías -->
+      <div class="rounded-2xl border border-white/10 bg-white/5 backdrop-blur-sm p-5">
+        <h2 class="text-xl sm:text-2xl font-semibold text-white mb-3">Tecnologías</h2>
+        <p class="text-gray-300 text-base sm:text-lg mb-4">
+          Stack centrado en JavaScript de punta a punta para acelerar el desarrollo y facilitar el mantenimiento.
+        </p>
+
+        <div class="grid grid-cols-2 sm:grid-cols-3 gap-4">
+          <!-- Node.js -->
+          <div class="flex flex-col items-center">
+            <div class="p-3 rounded-full bg-yellow-500/90 shadow transition-transform duration-300 hover:scale-110">
+              <img src="/icons/nodejs.svg" alt="Node.js" class="w-7 h-7">
+            </div>
+            <span class="mt-2 text-white text-sm font-medium">Node.js</span>
+          </div>
+          <!-- Express -->
+          <div class="flex flex-col items-center">
+            <div class="p-3 rounded-full bg-yellow-500/90 shadow transition-transform duration-300 hover:scale-110">
+              <img src="/icons/express.svg" alt="Express" class="w-7 h-7">
+            </div>
+            <span class="mt-2 text-white text-sm font-medium">Express</span>
+          </div>
+          <!-- MongoDB -->
+          <div class="flex flex-col items-center">
+            <div class="p-3 rounded-full bg-yellow-500/90 shadow transition-transform duration-300 hover:scale-110">
+              <img src="/icons/mongodb.svg" alt="MongoDB" class="w-7 h-7">
+            </div>
+            <span class="mt-2 text-white text-sm font-medium">MongoDB</span>
+          </div>
+          <!-- Tailwind -->
+          <div class="flex flex-col items-center">
+            <div class="p-3 rounded-full bg-yellow-500/90 shadow transition-transform duration-300 hover:scale-110">
+              <img src="/icons/tailwind.svg" alt="Tailwind CSS" class="w-7 h-7">
+            </div>
+            <span class="mt-2 text-white text-sm font-medium">Tailwind CSS</span>
+          </div>
+          <!-- JavaScript -->
+          <div class="flex flex-col items-center">
+            <div class="p-3 rounded-full bg-yellow-500/90 shadow transition-transform duration-300 hover:scale-110">
+              <img src="/icons/javascript.svg" alt="JavaScript" class="w-7 h-7">
+            </div>
+            <span class="mt-2 text-white text-sm font-medium">JavaScript</span>
+          </div>
+          <!-- EJS -->
+          <div class="flex flex-col items-center">
+            <div class="p-3 rounded-full bg-yellow-500/90 shadow transition-transform duration-300 hover:scale-110">
+              <img src="/icons/ejs.svg" alt="EJS" class="w-7 h-7">
+            </div>
+            <span class="mt-2 text-white text-sm font-medium">EJS</span>
+          </div>
+        </div>
+
+        <div class="mt-4 text-gray-300 text-sm">
+          <p>
+            Arquitectura organizada en <span class="font-medium text-white">controladores</span>,
+            <span class="font-medium text-white">repositorios</span>,
+            <span class="font-medium text-white">modelos</span> y
+            <span class="font-medium text-white">reglas de validación</span>,
+            con manejo de errores centralizado y vistas modulares.
+          </p>
+        </div>
+      </div>
+
+      <!-- Solo QR -->
+      <div class="rounded-2xl border border-white/10 bg-white/5 backdrop-blur-sm p-5 text-center">
+        <div class="flex flex-col items-center gap-2">
+          <img
+            src="/img/QR.svg"
+            alt="QR - Sígueme"
+            class="w-48 h-48 md:w-46 md:h-46 rounded-lg border border-white/10 object-cover"
+          />
+          <div>
+            <p class="text-white font-medium leading-tight text-lg">¡Sígueme en LinkedIn!</p>
+            <p class="text-gray-300 text-sm">Escaneá el código para novedades de proyectos.</p>
+          </div>
+        </div>
+      </div>
+    </aside>
+  </section>
+
+</div>

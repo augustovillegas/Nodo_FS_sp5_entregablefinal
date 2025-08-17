@@ -1,0 +1,227 @@
+<section class="panel max-w-screen-xl mx-auto my-8 lg:my-0">
+  <%- include('partials/alerts', { errors }) %>
+
+  <form
+    id="country-form"
+    action="/api/countries/<%= countryId %>?_method=PUT"
+    method="POST"
+    novalidate
+    class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-12 gap-y-6"
+  >
+    <% 
+      const get = (field, fallback) => old?.[field] ?? fallback ?? '';
+      const findErr = (p) => errors.find(e => e.param === p);
+      const flagErr = findErr('flags.svg') || findErr('flags.png');
+    %>
+
+    <!-- Nombre oficial -->
+    <div>
+      <label for="officialName" class="block text-sm font-semibold mb-1">
+        Nombre oficial <span class="text-yellow-500">*</span>
+      </label>
+      <input
+        id="officialName"
+        name="name.official"
+        type="text"
+        required
+        minlength="3"
+        maxlength="90"
+        title="No se permiten números ni emoticones."
+        placeholder="Ej: República de Testlandia"
+        value="<%= get('name.official', country?.name?.official) %>"
+        class="w-full px-3 py-2 border rounded-md bg-inherit text-white focus:outline-none focus:ring-2 focus:ring-yellow-500 <%= findErr('name.official') ? 'border-red-600 ring-2 ring-red-500' : '' %>"
+      />
+      <p id="officialName-error" class="mt-1 text-xs text-red-500 h-5">
+        <%= (findErr('name.official') || {}).msg || '' %>
+      </p>
+    </div>
+
+    <!-- Capital -->
+    <div>
+      <label for="capital" class="block text-sm font-semibold mb-1">
+        Capital <span class="text-yellow-500">*</span>
+      </label>
+      <input
+        id="capital"
+        name="capital"
+        type="text"
+        required
+        minlength="3"
+        maxlength="90"
+        title="No se permiten números ni emoticones."
+        placeholder="Ej: Testópolis"
+        value="<%= get('capital', country?.capital) %>"
+        class="w-full px-3 py-2 border rounded-md bg-inherit text-white focus:outline-none focus:ring-2 focus:ring-yellow-500 <%= findErr('capital') ? 'border-red-600 ring-2 ring-red-500' : '' %>"
+      />
+      <p id="capital-error" class="mt-1 text-xs text-red-500 h-5">
+        <%= (findErr('capital') || {}).msg || '' %>
+      </p>
+    </div>
+
+    <!-- Fronteras -->
+    <div>
+      <label for="borders" class="block text-sm font-semibold mb-1">
+        Fronteras (separados por comas)
+      </label>
+      <input
+        id="borders"
+        name="borders"
+        type="text"
+        pattern="^([A-Z]{3})(,\s*[A-Z]{3})*$"
+        title="Debe ser una lista separada por coma de códigos CCA3 (ej: ARG, BRA, URY)"
+        placeholder="Ej: ARG, CHL, URY"
+        value="<%= Array.isArray(get('borders', country?.borders)) ? get('borders', country?.borders).join(', ') : get('borders', '') %>"
+        class="w-full px-3 py-2 border rounded-md bg-inherit text-white focus:outline-none focus:ring-2 focus:ring-yellow-500 <%= findErr('borders') ? 'border-red-600 ring-2 ring-red-500' : '' %>"
+      />
+      <p id="borders-error" class="mt-1 text-xs text-red-500 h-5">
+        <%= (findErr('borders') || {}).msg || '' %>
+      </p>
+    </div>
+
+    <!-- Área -->
+    <div>
+      <label for="area" class="block text-sm font-semibold mb-1">
+        Área (km²) <span class="text-yellow-500">*</span>
+      </label>
+      <input
+        id="area"
+        name="area"
+        type="text"
+        inputmode="decimal"
+        required
+        pattern="^[0-9]+(\.[0-9]+)?$"
+        title="Debe ser un número positivo. Ej: 2780400"
+        placeholder="Ej: 2780400"
+        value="<%= get('area', country?.area) %>"
+        class="w-full px-3 py-2 border rounded-md bg-inherit text-white focus:outline-none focus:ring-2 focus:ring-yellow-500 <%= findErr('area') ? 'border-red-600 ring-2 ring-red-500' : '' %>"
+      />
+      <p id="area-error" class="mt-1 text-xs text-red-500 h-5">
+        <%= (findErr('area') || {}).msg || '' %>
+      </p>
+    </div>
+
+    <!-- Población -->
+    <div>
+      <label for="population" class="block text-sm font-semibold mb-1">
+        Población <span class="text-yellow-500">*</span>
+      </label>
+      <input
+        id="population"
+        name="population"
+        type="text"
+        inputmode="numeric"
+        required
+        pattern="^[0-9]+$"
+        title="Debe ser un número entero positivo. Ej: 45195777"
+        placeholder="Ej: 45195777"
+        value="<%= get('population', country?.population) %>"
+        class="w-full px-3 py-2 border rounded-md bg-inherit text-white focus:outline-none focus:ring-2 focus:ring-yellow-500 <%= findErr('population') ? 'border-red-600 ring-2 ring-red-500' : '' %>"
+      />
+      <p id="population-error" class="mt-1 text-xs text-red-500 h-5">
+        <%= (findErr('population') || {}).msg || '' %>
+      </p>
+    </div>
+
+    <!-- Gini -->
+    <div>
+      <label for="gini" class="block text-sm font-semibold mb-1">
+        Índice Gini
+      </label>
+      <input
+        id="gini"
+        name="gini"
+        type="text"
+        inputmode="decimal"
+        pattern="^[0-9]+(\.[0-9]+)?$"
+        min="0"
+        max="100"
+        placeholder="Ej: 45.6"
+        title="Debe estar entre 0 y 100"
+        value="<%= get('gini', country?.gini) %>"
+        class="w-full px-3 py-2 border rounded-md bg-inherit text-white focus:outline-none focus:ring-2 focus:ring-yellow-500 <%= findErr('gini') ? 'border-red-600 ring-2 ring-red-500' : '' %>"
+      />
+      <p id="gini-error" class="mt-1 text-xs text-red-500 h-5">
+        <%= (findErr('gini') || {}).msg || '' %>
+      </p>
+    </div>
+
+    <!-- Zona horaria -->
+    <div>
+      <label for="timezones" class="block text-sm font-semibold mb-1">
+        Zona horaria <span class="text-yellow-500">*</span>
+      </label>
+      <input
+        id="timezones"
+        name="timezones"
+        type="text"
+        required
+        pattern="^UTC[+-][0-1][0-9]:[0-5][0-9]$"
+        title="Formato requerido: UTC±HH:MM (Ej: UTC-03:00)"
+        placeholder="Ej: UTC-03:00"
+        value="<%= get('timezones', country?.timezones) %>"
+        class="w-full px-3 py-2 border rounded-md bg-inherit text-white focus:outline-none focus:ring-2 focus:ring-yellow-500 <%= findErr('timezones') ? 'border-red-600 ring-2 ring-red-500' : '' %>"
+      />
+      <p id="timezones-error" class="mt-1 text-xs text-red-500 h-5">
+        <%= (findErr('timezones') || {}).msg || '' %>
+      </p>
+    </div>
+
+    <!-- Bandera -->
+    <div>
+      <label for="flagUrl" class="block text-sm font-semibold mb-1">
+        Bandera (URL .svg o .png)
+      </label>
+      <input
+        id="flagUrl"
+        name="flagUrl"
+        type="text"
+        autocomplete="off"
+        pattern="^https?:\/\/.*\.(svg|png)$"
+        title="Debe ser una URL válida (http o https). No se permiten emoticones."
+        placeholder="https://ejemplo.com/bandera.svg o bandera.png"
+        value="<%= get('flags.svg', country?.flags?.svg) || get('flags.png', country?.flags?.png) %>"
+        class="w-full px-3 py-2 border rounded-md bg-inherit text-white focus:outline-none focus:ring-2 <%= flagErr ? 'ring-red-500 border-red-600' : 'ring-yellow-500 border-gray-600' %>"
+      />
+      <input type="hidden" name="flagsSvg" id="flagsSvg" value="<%= get('flags.svg', country?.flags?.svg) %>" />
+      <input type="hidden" name="flagsPng" id="flagsPng" value="<%= get('flags.png', country?.flags?.png) %>" />
+      <p id="flagUrl-error" class="mt-1 text-xs text-red-500 h-5">
+        <%= (flagErr || {}).msg || '' %>
+      </p>
+    </div>
+
+    <!-- Creador -->
+    <div>
+      <label for="creador" class="block text-sm font-semibold mb-1">
+        Creador <span class="text-yellow-500">*</span>
+      </label>
+      <input
+        id="creador"
+        name="creador"
+        type="text"
+        required
+        minlength="3"
+        maxlength="90"
+        pattern="^[^\d\u{1F600}-\u{1F6FF}]*$"
+        title="No se permiten números ni emoticones."
+        placeholder="Ej: Augusto Villegas"
+        value="<%= get('creador', country?.creador) %>"
+        class="w-full px-3 py-2 border rounded-md bg-inherit text-white focus:outline-none focus:ring-2 focus:ring-yellow-500 <%= findErr('creador') ? 'border-red-600 ring-2 ring-red-500' : '' %>"
+      />
+      <p id="creador-error" class="mt-1 text-xs text-red-500 h-5">
+        <%= (findErr('creador') || {}).msg || '' %>
+      </p>
+    </div>
+
+    <!-- Acciones -->
+    <div class="lg:col-span-3 flex justify-end mt-6">
+      <%- include('partials/form-actions', { submitLabel: 'Actualizar', cancelHref: '/api/countries' }) %>
+    </div>
+  </form>
+
+  <%- include('partials/modal-confirmation', { confirmTitle: 'Confirmar actualización', confirmMessage: '¿Confirmás actualizar este país?' }) %>
+</section>
+
+<script src="/js/form-utils.js" defer></script>
+<script src="/js/confirm-modal.js" defer></script>
+<script src="/js/confirm-submit.js" defer></script>
+<script src="/js/focus-errors.js" defer></script>

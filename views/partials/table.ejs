@@ -1,0 +1,105 @@
+<div class="border border-soft rounded-sm shadow bg-dark overflow-hidden font-['Roboto']">
+  <table class="table-fixed w-full text-xs sm:text-sm divide-y divide-gray-800">
+    <thead class="bg-gray-900 text-white">
+      <tr>
+        <th class="w-8 px-2 sm:px-4 py-3 text-center font-medium uppercase">Ver</th>
+        <th class="w-2/5 sm:w-1/5 px-4 sm:px-6 lg:px-8 py-3 text-center font-medium uppercase">Nombre</th>
+        <th class="hidden sm:table-cell w-1/3 sm:w-1/6 px-4 sm:px-6 py-3 text-center font-medium uppercase">Capital</th>
+        <th class="hidden sm:table-cell w-16 px-2 sm:px-4 py-3 text-center font-medium uppercase">Área</th>
+        <th class="hidden md:table-cell w-1/4 sm:w-1/6 px-4 sm:px-6 py-3 text-center font-medium uppercase">Población</th>
+        <th class="hidden lg:table-cell w-1/4 sm:w-1/6 px-4 sm:px-6 py-3 text-center font-medium uppercase">Z. Horaria</th>
+        <th class="hidden sm:table-cell w-16 px-2 sm:px-4 py-3 text-center font-medium uppercase">GINI</th>
+        <th class="hidden 2xl:table-cell w-1/4 sm:w-1/6 px-4 sm:px-6 py-3 text-center font-medium uppercase">Fronteras</th>
+        <th class="hidden sm:table-cell w-1/4 sm:w-1/6 px-4 sm:px-6 py-3 text-center font-medium uppercase">Creador</th>
+        <th class="w-48 px-4 py-3 text-center font-medium uppercase">Acciones</th>
+      </tr>
+    </thead>
+
+    <tbody id="countries-table-body" class="divide-y divide-gray-800">
+      <% countries.forEach((p, idx) => { %>
+        <tr
+          <% if (idx >= 5) { %> style="display:none;" <% } %>
+          class="hover:bg-[#1a1a1a] transition-colors duration-200 cursor-pointer"
+          onclick="showCountryModal(this)"
+          data-name="<%= p.name.official %>"
+          data-capital="<%= p.capital %>"
+          data-area="<%= p.area %>"
+          data-population="<%= p.population %>"
+          data-timezones="<%= p.timezones %>"
+          data-gini="<%= p.gini ?? '-' %>"
+          data-borders='<%= JSON.stringify(p.borders || []) %>'
+          data-flag="<%= p.flags?.svg || p.flags?.png || '' %>"
+          data-creator="<%= p.creador %>"
+        >
+          <!-- Ver -->
+          <td class="px-2 sm:px-4 py-4 text-center">
+            <i class="ph ph-eye text-yellow-400 hover:text-yellow-300 transition-colors cursor-pointer"
+              aria-label="Ver detalles"
+              onclick="event.stopPropagation(); showCountryModal(this.closest('tr'))"></i>
+          </td>
+
+          <!-- Nombre -->
+          <td class="px-4 sm:px-6 lg:px-8 py-4 text-center font-semibold text-gray-200">
+            <%= p.name.official %>
+          </td>
+
+          <!-- Capital -->
+          <td class="hidden sm:table-cell px-4 sm:px-6 py-4 text-center text-gray-300 truncate">
+            <%= p.capital %>
+          </td>
+
+          <!-- Área -->
+          <td class="hidden sm:table-cell px-2 sm:px-4 py-4 text-center text-gray-300">
+            <%= p.area %>
+          </td>
+
+          <!-- Población -->
+          <td class="hidden md:table-cell px-4 sm:px-6 py-4 text-center text-gray-300 truncate">
+            <%= p.population %>
+          </td>
+
+          <!-- Zona horaria -->
+          <td class="hidden lg:table-cell px-4 sm:px-6 py-4 text-center text-gray-300 truncate">
+            <%= p.timezones %>
+          </td>
+
+          <!-- GINI -->
+          <td class="hidden sm:table-cell px-2 sm:px-4 py-4 text-center text-gray-300">
+            <%= p.gini ?? '-' %>
+          </td>
+
+          <!-- Fronteras -->
+          <td class="hidden 2xl:table-cell px-4 sm:px-6 py-4 text-center text-gray-300 truncate">
+            <%= (p.borders || []).join(', ') %>
+          </td>
+
+          <!-- Creador -->
+          <td class="hidden sm:table-cell px-4 sm:px-6 py-4 text-center text-gray-300">
+            <%= p.creador %>
+          </td>
+
+          <!-- Acciones -->
+          <td class="px-4 py-4 text-center">
+            <div class="flex flex-row items-center justify-center gap-2">
+              <!-- Editar -->
+              <a href="/api/countries/<%= p.id %>/editar"
+                onclick="event.stopPropagation()"
+                class="primary btn-sm text-black flex items-center gap-1">
+                 <i class="ph ph-pencil"></i>
+                Editar
+              </a>
+
+              <!-- Eliminar -->
+              <button type="button"
+                onclick="event.stopPropagation(); confirmDelete.open('<%= p.id %>', '<%= p.name.official %>')"
+                class="danger btn-sm flex items-center gap-1">
+                <i class="ph ph-trash"></i>
+                Eliminar
+              </button>
+            </div>
+          </td>
+        </tr>
+      <% }) %>
+    </tbody>
+  </table>
+</div>

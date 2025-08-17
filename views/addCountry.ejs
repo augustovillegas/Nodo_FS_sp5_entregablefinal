@@ -1,0 +1,205 @@
+<section class="panel max-w-screen-xl mx-auto my-8 lg:my-0">
+  <%- include('partials/alerts', { errors }) %>
+
+  <form
+    id="country-form"
+    action="/api/countries/agregar"
+    method="POST"
+    novalidate
+    class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-12 gap-y-6"
+  >
+    <% const get = (field) => old?.[field] ?? '' %>
+
+    <div>
+      <label for="officialName" class="block text-sm font-semibold mb-1"
+        >Nombre oficial <span class="text-yellow-500">*</span></label
+      >
+      <input
+        id="officialName"
+        name="name.official"
+        type="text"
+        required
+        autocomplete="off"
+        minlength="3"
+        maxlength="90"        
+        placeholder="Ej: República de Testlandia"
+        value="<%= get('name.official') %>"
+        class="w-full px-3 py-2 border rounded-md bg-inherit text-white focus:outline-none focus:ring-2 focus:ring-yellow-500 <%= errors.find(e => e.param === 'name.official') ? 'border-red-600 ring-2 ring-red-500' : '' %>"
+      />
+      <p id="officialName-error" class="mt-1 text-xs text-red-500 h-5">
+        <%= (errors.find(e => e.param === 'name.official') || {}).msg || '' %>
+      </p>
+    </div>
+
+    <div>
+      <label for="capital" class="block text-sm font-semibold mb-1"
+        >Capital <span class="text-yellow-500">*</span></label
+      >
+      <input
+        id="capital"
+        name="capital"
+        type="text"
+        required
+        autocomplete="off"
+        minlength="3"
+        maxlength="90"        
+        placeholder="Ej: Testópolis"
+        value="<%= get('capital') %>"
+        class="w-full px-3 py-2 border rounded-md bg-inherit text-white focus:outline-none focus:ring-2 focus:ring-yellow-500 <%= errors.find(e => e.param === 'capital') ? 'border-red-600 ring-2 ring-red-500' : '' %>"
+      />
+      <p id="capital-error" class="mt-1 text-xs text-red-500 h-5">
+        <%= (errors.find(e => e.param === 'capital') || {}).msg || '' %>
+      </p>
+    </div>
+
+    <div>
+      <label for="borders" class="block text-sm font-semibold mb-1"
+        >Fronteras (separados por comas)</label
+      >
+      <input
+        id="borders"
+        name="borders"
+        type="text"
+        autocomplete="off"
+        pattern="^([A-Z]{3})(,\s*[A-Z]{3})*$"        
+        placeholder="Ej: ARG, CHL, URY"
+        value="<%= get('borders') %>"
+        class="w-full px-3 py-2 border rounded-md bg-inherit text-white focus:outline-none focus:ring-2 focus:ring-yellow-500 <%= errors.find(e => e.param === 'borders') ? 'border-red-600 ring-2 ring-red-500' : '' %>"
+      />
+      <p id="borders-error" class="mt-1 text-xs text-red-500 h-5">
+        <%= (errors.find(e => e.param === 'borders') || {}).msg || '' %>
+      </p>
+    </div>
+
+    <div>
+      <label for="area" class="block text-sm font-semibold mb-1"
+        >Área (km²) <span class="text-yellow-500">*</span></label
+      >
+      <input
+        id="area"
+        name="area"
+        type="text"
+        inputmode="decimal"
+        required
+        autocomplete="off"
+        pattern="^[0-9]+(\.[0-9]+)?$"        
+        placeholder="Ej: 2780400"
+        value="<%= get('area') %>"
+        class="w-full px-3 py-2 border rounded-md bg-inherit text-white focus:outline-none focus:ring-2 focus:ring-yellow-500 <%= errors.find(e => e.param === 'area') ? 'border-red-600 ring-2 ring-red-500' : '' %>"
+      />
+      <p id="area-error" class="mt-1 text-xs text-red-500 h-5">
+        <%= (errors.find(e => e.param === 'area') || {}).msg || '' %>
+      </p>
+    </div>
+
+    <div>
+      <label for="population" class="block text-sm font-semibold mb-1"
+        >Población <span class="text-yellow-500">*</span></label
+      >
+      <input
+        id="population"
+        name="population"
+        type="text"
+        inputmode="numeric"
+        required
+        autocomplete="off"
+        pattern="^[0-9]+$"        
+        placeholder="Ej: 45195777"
+        value="<%= get('population') %>"
+        class="w-full px-3 py-2 border rounded-md bg-inherit text-white focus:outline-none focus:ring-2 focus:ring-yellow-500 <%= errors.find(e => e.param === 'population') ? 'border-red-600 ring-2 ring-red-500' : '' %>"
+      />
+      <p id="population-error" class="mt-1 text-xs text-red-500 h-5">
+        <%= (errors.find(e => e.param === 'population') || {}).msg || '' %>
+      </p>
+    </div>
+
+    <div>
+      <label for="gini" class="block text-sm font-semibold mb-1"
+        >Índice Gini</label
+      >
+      <input
+        id="gini"
+        name="gini"
+        type="text"
+        inputmode="decimal"
+        autocomplete="off"
+        pattern="^[0-9]+(\.[0-9]+)?$"        
+        placeholder="Ej: 45.6"
+        value="<%= get('gini') %>"
+        class="w-full px-3 py-2 border rounded-md bg-inherit text-white focus:outline-none focus:ring-2 focus:ring-yellow-500 <%= errors.find(e => e.param === 'gini') ? 'border-red-600 ring-2 ring-red-500' : '' %>"
+      />
+      <p id="gini-error" class="mt-1 text-xs text-red-500 h-5">
+        <%= (errors.find(e => e.param === 'gini') || {}).msg || '' %>
+      </p>
+    </div>
+
+    <div>
+      <label for="timezones" class="block text-sm font-semibold mb-1"
+        >Zona horaria <span class="text-yellow-500">*</span></label
+      >
+      <input
+        id="timezones"
+        name="timezones"
+        type="text"
+        required
+        autocomplete="off"
+        pattern="^UTC[+-][0-1][0-9]:[0-5][0-9]$"        
+        placeholder="Ej: UTC-03:00"
+        value="<%= get('timezones') %>"
+        class="w-full px-3 py-2 border rounded-md bg-inherit text-white focus:outline-none focus:ring-2 focus:ring-yellow-500 <%= errors.find(e => e.param === 'timezones') ? 'border-red-600 ring-2 ring-red-500' : '' %>"
+      />
+      <p id="timezones-error" class="mt-1 text-xs text-red-500 h-5">
+        <%= (errors.find(e => e.param === 'timezones') || {}).msg || '' %>
+      </p>
+    </div>
+
+    <div>
+      <label for="flags" class="block text-sm font-semibold mb-1"
+        >Banderas <span class="text-yellow-500"></span
+      ></label>
+      <input
+        id="flags"
+        name="flags"
+        type="text"
+        placeholder="Ej: https://.../bandera.png o .svg"
+        value="<%= get('flags') %>"
+        class="w-full px-3 py-2 border rounded-md bg-inherit text-white focus:outline-none focus:ring-2 focus:ring-yellow-500 <%= errors.find(e => e.param === 'flags') ? 'border-red-600 ring-2 ring-red-500' : '' %>"
+      />
+      <p id="flags-error" class="mt-1 text-xs text-red-500 h-5">
+        <%= (errors.find(e => e.param === 'flags') || {}).msg || '' %>
+      </p>
+    </div>
+
+    <div>
+      <label for="creador" class="block text-sm font-semibold mb-1"
+        >Creador <span class="text-yellow-500">*</span></label
+      >
+      <input
+        id="creador"
+        name="creador"
+        type="text"
+        required
+        autocomplete="off"
+        minlength="3"
+        maxlength="90"        
+        placeholder="Ej: Augusto Villegas"
+        value="<%= get('creador') %>"
+        class="w-full px-3 py-2 border rounded-md bg-inherit text-white focus:outline-none focus:ring-2 focus:ring-yellow-500 <%= errors.find(e => e.param === 'creador') ? 'border-red-600 ring-2 ring-red-500' : '' %>"
+      />
+      <p id="creador-error" class="mt-1 text-xs text-red-500 h-5">
+        <%= (errors.find(e => e.param === 'creador') || {}).msg || '' %>
+      </p>
+    </div>
+
+    <div class="lg:col-span-3 flex justify-end mt-6">
+      <%- include('partials/form-actions', { submitLabel: 'Agregar', cancelHref:'/api/countries' }) %>
+    </div>
+  </form>
+
+  <%- include('partials/modal-confirmation', { confirmTitle: 'Confirmar creación', confirmMessage: '¿Confirmás agregar este país?' }) %>
+</section>
+
+<script src="/js/form-utils.js" defer></script>
+<script src="/js/confirm-modal.js" defer></script>
+<script src="/js/confirm-submit.js" defer></script>
+<script src="/js/focus-errors.js" defer></script>

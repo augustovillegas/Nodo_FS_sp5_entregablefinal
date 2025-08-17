@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title><%= typeof title !== 'undefined' ? title : "Countries App" %></title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter&family=Lato&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="icon" type="image/svg+xml" href="/img/favicon.png">
+  <link rel="stylesheet" href="/css/custom-styles.css">
+  <script src="https://unpkg.com/@phosphor-icons/web"></script>
+</head>
+<body class="flex flex-col min-h-screen">
+
+  <!-- Navbar (con fondo negro definido) -->
+  <%- include('partials/navbar') %>
+
+  <% if (page === 'home') { %>
+    <!-- Hero principal con fondo ajustado -->
+    <div class="relative grow">
+      <!-- Imagen de fondo -->
+      <div class="absolute inset-0 
+         bg-[url('/img/bg.png')] 
+         bg-no-repeat 
+         bg-cover 
+         bg-[position:85%_bottom]           
+         md:bg-[position:right_bottom]">></div>
+      <!-- Overlay oscuro -->
+      <div class="absolute inset-0 bg-black/60"></div>
+      <!-- Contenido principal -->
+      <main class="relative z-10 flex h-full w-full">
+        <%- body %>
+      </main>
+    </div>
+  <% } else { %>
+    <main class="flex-1 w-full px-4 sm:px-6 lg:px-8 py-6 mx-auto max-w-screen-xl">
+      <%- body %>
+    </main>
+  <% } %>
+
+  <%- include('partials/footer') %>
+</body>
+</html>

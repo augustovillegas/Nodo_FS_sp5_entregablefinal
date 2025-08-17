@@ -1,0 +1,10 @@
+<% if (errors && errors.length) { %>
+  <div class="alert alert-error">
+    <h3 class="font-semibold mb-2">Por favor corregí los siguientes errores:</h3>
+    <ul class="list-disc list-inside ml-4 space-y-1 text-sm">
+      <% errors.forEach(err => { %>
+        <li><%= err.msg %></li>
+      <% }) %>
+    </ul>
+  </div>
+<% } %>

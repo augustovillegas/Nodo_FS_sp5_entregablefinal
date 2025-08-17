@@ -1,0 +1,17 @@
+<div class="flex gap-4">
+  <a
+    href="<%= cancelHref %>"
+    class="secondary btn-sm"
+  >
+    Cancelar
+  </a>
+  <button
+    type="submit"
+    data-confirm="true"
+    class="primary btn-sm"
+    data-confirm
+  >
+    <%= submitLabel ||
+'Guardar' %>
+  </button>
+</div>

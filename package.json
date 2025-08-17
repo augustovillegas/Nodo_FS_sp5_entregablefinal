@@ -1,0 +1,35 @@
+{
+  "name": "nodo-sprint5-entreglefinal",
+  "version": "1.0.0",
+  "description": "Sprint 5 - Entregable final",
+  "main": "server.mjs",
+  "type": "module",
+  "scripts": {
+    "start": "node server.mjs",
+    "dev": "nodemon server.mjs",
+    "seed:countries": "node ./scripts/seedCountries.mjs",
+    "test": "cross-env NODE_ENV=test vitest",
+    "reset:countries": "node ./scripts/resetCountries.mjs"
+  },
+  "author": "Augusto Villegas",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^1.11.0",
+    "bad-words": "^4.0.0",
+    "dotenv": "^17.2.1",
+    "ejs": "^3.1.10",
+    "express": "^5.1.0",
+    "express-ejs-layouts": "^2.5.1",
+    "express-validator": "^7.2.1",
+    "json2csv": "^6.0.0-alpha.2",
+    "method-override": "^3.0.0",
+    "mongoose": "^8.17.1",
+    "node-cron": "^4.2.1"
+  },
+  "devDependencies": {
+    "cross-env": "^10.0.0",
+    "nodemon": "^3.1.10",
+    "supertest": "^7.1.4",
+    "vitest": "^3.2.4"
+  }
+}

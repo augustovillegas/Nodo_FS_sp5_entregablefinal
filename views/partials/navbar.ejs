@@ -1,0 +1,67 @@
+<nav class="bg-dark shadow-md  border-b border-soft">
+  <div class="max-w-screen-xl mx-auto px-4">
+
+    <!-- Branding -->
+    <div class="h-14 flex items-center justify-between gap-4">
+      <a href="/" class="shrink-0 text-white font-medium text-lg sm:text-xl tracking-tight">
+        American Countries App
+      </a>
+
+      <!-- Navegación desktop -->
+      <div class="hidden sm:flex items-center gap-6 text-sm font-medium">
+        <a href="/" class="flex items-center gap-2 text-white hover:text-yellow-400 transition-colors">
+          <img src="/icons/home.svg" alt="Información" class="icon-white w-6 h-6" />
+          <span>Inicio</span>
+        </a>
+        <a href="/api/countries" class="flex items-center gap-2 text-white hover:text-yellow-400 transition-colors">
+          <img src="/icons/list.svg" alt="Información" class="icon-white w-6 h-6" />
+          <span>Listado</span>
+        </a>
+        <a href="/api/countries/agregar" class="flex items-center gap-2 text-white hover:text-yellow-400 transition-colors">
+          <img src="/icons/add.svg" alt="Información" class="icon-white w-6 h-6" />
+          <span>Agregar</span>
+        </a>
+        <a href="/info" class="flex items-center gap-2 text-white hover:text-yellow-400 transition-colors">
+          <img src="/icons/info.svg" alt="Información" class="icon-white w-6 h-6" />
+          <span>Información</span>
+        </a>
+      </div>
+
+      <!-- Navegación móvil -->
+      <div class="flex sm:hidden items-center gap-3">
+        <a href="/" class="text-white hover:text-yellow-400">
+          <img src="/icons/home.svg" alt="Información" class="icon-white w-6 h-6" />
+        </a>
+        <a href="/api/countries" class="text-white hover:text-yellow-400">
+          <img src="/icons/list.svg" alt="Información" class="icon-white w-6 h-6" />
+        </a>
+        <a href="/api/countries/agregar" class="text-white hover:text-yellow-400">
+          <img src="/icons/add.svg" alt="Información" class="icon-white w-6 h-6" />
+        </a>
+        <a href="/info" class="text-white hover:text-yellow-400">
+          <img src="/icons/info.svg" alt="Información" class="icon-white w-6 h-6" />
+        </a>
+      </div>
+    </div>
+
+    <!-- Título de sección -->
+    <% 
+      const tituloNavbar = (typeof sectionTitle !== 'undefined' && sectionTitle) 
+        ? sectionTitle 
+        : (typeof title !== 'undefined' ? title : '');
+    %>
+    <% if (tituloNavbar) { %>
+      <div class="w-full h-10 flex items-center gap-3 border-t border-white/10">
+        <img src="/icons/nodejs.svg" alt="Sección" class="icon-white w-5 h-5 opacity-80" />
+        <div 
+          role="heading" aria-level="1" 
+          title="<%= tituloNavbar %>"
+          class="font-['Lato'] text-white tracking-tight truncate text-base sm:text-lg md:text-xl"
+        >
+          <%= tituloNavbar %>
+        </div>
+      </div>
+    <% } %>
+
+  </div>
+</nav>
