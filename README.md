@@ -80,7 +80,7 @@ Una aplicación full stack desarrollada desde cero que permite administrar infor
 
 ### 1. Clonar repositorio
 ```bash
-git clone https://github.com/augustovillegas/Nodo_FS_sp5_entreglefinal.git
+git clone https://github.com/augustovillegas/Nodo_FS_sp5_entregablefinal.git
 cd nodo-sprint5-entreglefinal
 ```
 
