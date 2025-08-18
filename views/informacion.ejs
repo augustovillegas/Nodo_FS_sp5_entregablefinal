@@ -1,146 +1,203 @@
-<div class="container mx-auto px-4 py-6">  
+<div class="container mx-auto px-4 py-4 md:py-6">
 
-  <!-- Cuerpo principal: Story + Tech + Acciones -->
-  <section class="grid md:grid-cols-5 gap-6 items-start">
+  <!-- GRID: 3 columnas en desktop -->
+  <section class="grid md:grid-cols-3 gap-5 items-stretch">
 
-    <!-- Storytelling / Propósito (col-span 3 en desktop) -->
-    <article class="md:col-span-3">
-      <div class="rounded-2xl border border-white/10 bg-white/5 backdrop-blur-sm p-5">
-        <h2 class="text-xl sm:text-2xl font-semibold text-white mb-3">
-          Propósito del proyecto
-        </h2>
-        <p class="text-gray-200 text-base sm:text-lg">
-          Construir una herramienta de administración clara, rápida y confiable para gestionar
-          <span class="font-semibold text-white">países de América</span>: crear, editar, buscar, filtrar y paginar
-          registros con validaciones robustas y una experiencia de usuario limpia y consistente.
-        </p>
-
-        <!-- Botón GitHub debajo de Propósito -->
-        <div class="mt-6 text-center">
-          <a
-            href="<%= typeof githubUrl !== 'undefined' && githubUrl ? githubUrl : 'https://github.com/augustovillegas/Nodo_FS_sp5_entregablefinal.git' %>"
-            target="_blank"
-            class="inline-flex w-full sm:w-auto items-center justify-center gap-2 bg-yellow-400 hover:bg-yellow-300 text-black font-semibold px-6 py-3 rounded-xl transition"
-            aria-label="Ver código en GitHub"
+    <!-- FILA 1 (desktop): Funcionalidades ocupa las 3 columnas -->
+    <article class="md:col-span-3 w-full">
+      <div class="h-full rounded-2xl border border-white/10 bg-white/5 backdrop-blur-sm p-5 md:p-6">
+        <header class="mb-3 flex items-start justify-between gap-4">
+          <div>
+            <h2 class="text-xl sm:text-2xl font-semibold text-white">Funcionalidades</h2>
+            <p class="text-gray-300/90 text-sm">Operaciones clave del panel y comportamiento de la app.</p>
+          </div>
+          <!-- Toggle (flecha derecha cerrado / abajo abierto) -->
+          <button
+            type="button"
+            class="inline-flex items-center gap-2 text-yellow-400 hover:text-yellow-300 font-semibold text-sm transition"
+            data-info-toggle="funcionalidades-content"
+            data-icon-right="ph-caret-right"
+            data-icon-down="ph-caret-down"
+            aria-controls="funcionalidades-content"
+            aria-expanded="false"
+            title="Ver más funcionalidades"
           >
-            <i class="ph ph-github-logo text-xl"></i>
-            Ver código en GitHub
-          </a>
-        </div>
+            <i class="ph ph-caret-right text-base transition-transform duration-300 text-yellow-400"></i>
+            Ver más
+          </button>
+        </header>
 
-        <div class="my-5 h-px bg-gradient-to-r from-transparent via-white/20 to-transparent"></div>
+        <!-- Lista: muestra 2 ítems; el resto en bloque colapsable -->
+        <div class="space-y-3">
+          <!-- 1) CRUD -->
+          <div class="flex gap-3 p-3 rounded-xl border border-white/10 bg-white/5">
+            <div class="shrink-0 w-10 h-10 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center">
+              <i class="ph ph-check-circle text-xl text-yellow-400"></i>
+            </div>
+            <div class="text-gray-200">
+              <p class="font-medium text-white leading-tight">CRUD seguro con confirmaciones</p>
+              <p class="text-sm text-gray-300/90">Alta, edición y eliminación con validaciones y confirmación antes de acciones críticas.</p>
+            </div>
+          </div>
 
-        <h3 class="text-lg sm:text-xl font-semibold text-white mb-2">
-          Enfoque y alcance
-        </h3>
-        <ul class="list-disc list-inside text-gray-200 space-y-2">
-          <li><span class="font-medium text-white">Usabilidad:</span> interfaz sobria, semántica visual coherente y feedback inmediato.</li>
-          <li><span class="font-medium text-white">Escalabilidad:</span> arquitectura modular (controladores, repositorios, validaciones) y patrones consistentes.</li>
-          <li><span class="font-medium text-white">Calidad:</span> reglas de validación reutilizables, manejo de errores centralizado y tests de validación.</li>
-          <li><span class="font-medium text-white">Rendimiento:</span> paginación del lado del servidor y búsquedas eficientes.</li>
-        </ul>
+          <!-- 2) Búsqueda / paginación -->
+          <div class="flex gap-3 p-3 rounded-xl border border-white/10 bg-white/5">
+            <div class="shrink-0 w-10 h-10 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center">
+              <i class="ph ph-magnifying-glass text-xl text-yellow-400"></i>
+            </div>
+            <div class="text-gray-200">
+              <p class="font-medium text-white leading-tight">Búsqueda y paginación</p>
+              <p class="text-sm text-gray-300/90">Listados rápidos con paginación del lado del servidor y buscador ágil.</p>
+            </div>
+          </div>
 
-        <div class="mt-5">
-          <h3 class="text-lg sm:text-xl font-semibold text-white mb-2">Funcionalidades destacadas</h3>
-          <div class="grid sm:grid-cols-2 gap-3">
-            <div class="rounded-xl border border-white/10 p-4">
-              <p class="text-gray-200"><span class="font-medium text-white">CRUD</span> de países con confirmaciones antes de acciones críticas.</p>
+          <!-- Colapsable (resto de funcionalidades) -->
+          <div id="funcionalidades-content" class="space-y-3">
+            <!-- 3) Validaciones -->
+            <div class="flex gap-3 p-3 rounded-xl border border-white/10 bg-white/5">
+              <div class="shrink-0 w-10 h-10 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center">
+                <i class="ph ph-shield-check text-xl text-yellow-400"></i>
+              </div>
+              <div class="text-gray-200">
+                <p class="font-medium text-white leading-tight">Validaciones consistentes</p>
+                <p class="text-sm text-gray-300/90">Reglas reutilizables, filtros de lenguaje y manejo de errores centralizado.</p>
+              </div>
             </div>
-            <div class="rounded-xl border border-white/10 p-4">
-              <p class="text-gray-200">Búsqueda y <span class="font-medium text-white">paginación</span> para listas extensas.</p>
+
+            <!-- 4) Seed / reset -->
+            <div class="flex gap-3 p-3 rounded-xl border border-white/10 bg-white/5">
+              <div class="shrink-0 w-10 h-10 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center">
+                <i class="ph ph-arrows-clockwise text-xl text-yellow-400"></i>
+              </div>
+              <div class="text-gray-200">
+                <p class="font-medium text-white leading-tight">Seed / reset desde API externa</p>
+                <p class="text-sm text-gray-300/90">Sincronización con RESTCountries y utilidades para poblar o reiniciar datos.</p>
+              </div>
             </div>
-            <div class="rounded-xl border border-white/10 p-4">
-              <p class="text-gray-200">Validaciones de campos y mensajes de error consistentes.</p>
+
+            <!-- 5) Exportación -->
+            <div class="flex gap-3 p-3 rounded-xl border border-white/10 bg-white/5">
+              <div class="shrink-0 w-10 h-10 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center">
+                <i class="ph ph-file-arrow-down text-xl text-yellow-400"></i>
+              </div>
+              <div class="text-gray-200">
+                <p class="font-medium text-white leading-tight">Exportación</p>
+                <p class="text-sm text-gray-300/90">Descarga de datos en CSV para informes o respaldo.</p>
+              </div>
             </div>
-            <div class="rounded-xl border border-white/10 p-4">
-              <p class="text-gray-200">Vistas EJS responsivas con <span class="font-medium text-white">Tailwind</span> y semántica de botones alineada al proyecto.</p>
+
+            <!-- 6) Tests -->
+            <div class="flex gap-3 p-3 rounded-xl border border-white/10 bg-white/5">
+              <div class="shrink-0 w-10 h-10 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center">
+                <i class="ph ph-flask text-xl text-yellow-400"></i>
+              </div>
+              <div class="text-gray-200">
+                <p class="font-medium text-white leading-tight">Pruebas automatizadas</p>
+                <p class="text-sm text-gray-300/90">Cobertura de validaciones y endpoints con Vitest + Supertest.</p>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </article>
 
-    <!-- Tecnologías + QR (col-span 2 en desktop) -->
-    <aside class="md:col-span-2 space-y-6">
+    <!-- FILA 2 (desktop): Tecnologías | QR | GitHub comparten la fila -->
+    <!-- Tecnologías -->
+    <section class="h-full">
+      <div class="h-full rounded-2xl border border-white/10 bg-white/5 backdrop-blur-sm p-6">
+        <header class="mb-3">
+          <h2 class="text-xl sm:text-2xl font-semibold text-white">Tecnologías</h2>
+          <p class="text-gray-300/90 text-sm">Herramientas aplicadas en el desarrollo del proyecto.</p>
+        </header>
 
-      <!-- Tecnologías -->
-      <div class="rounded-2xl border border-white/10 bg-white/5 backdrop-blur-sm p-5">
-        <h2 class="text-xl sm:text-2xl font-semibold text-white mb-3">Tecnologías</h2>
-        <p class="text-gray-300 text-base sm:text-lg mb-4">
-          Stack centrado en JavaScript de punta a punta para acelerar el desarrollo y facilitar el mantenimiento.
-        </p>
-
-        <div class="grid grid-cols-2 sm:grid-cols-3 gap-4">
+        <div class="grid grid-cols-2 sm:grid-cols-3 gap-5">
           <!-- Node.js -->
-          <div class="flex flex-col items-center">
-            <div class="p-3 rounded-full bg-yellow-500/90 shadow transition-transform duration-300 hover:scale-110">
-              <img src="/icons/nodejs.svg" alt="Node.js" class="w-7 h-7">
+          <div class="flex flex-col items-center gap-2">
+            <div class="w-12 h-12 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center">
+              <img src="/icons/nodejs.svg" alt="Node.js" class="w-7 h-7"
+                   style="filter: brightness(1) sepia(1) saturate(10) hue-rotate(350deg);" />
             </div>
-            <span class="mt-2 text-white text-sm font-medium">Node.js</span>
+            <p class="text-sm text-gray-300">Node.js</p>
           </div>
           <!-- Express -->
-          <div class="flex flex-col items-center">
-            <div class="p-3 rounded-full bg-yellow-500/90 shadow transition-transform duration-300 hover:scale-110">
-              <img src="/icons/express.svg" alt="Express" class="w-7 h-7">
+          <div class="flex flex-col items-center gap-2">
+            <div class="w-12 h-12 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center">
+              <img src="/icons/express.svg" alt="Express" class="w-7 h-7"
+                   style="filter: brightness(1) sepia(1) saturate(10) hue-rotate(350deg);" />
             </div>
-            <span class="mt-2 text-white text-sm font-medium">Express</span>
+            <p class="text-sm text-gray-300">Express</p>
           </div>
           <!-- MongoDB -->
-          <div class="flex flex-col items-center">
-            <div class="p-3 rounded-full bg-yellow-500/90 shadow transition-transform duration-300 hover:scale-110">
-              <img src="/icons/mongodb.svg" alt="MongoDB" class="w-7 h-7">
+          <div class="flex flex-col items-center gap-2">
+            <div class="w-12 h-12 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center">
+              <img src="/icons/mongodb.svg" alt="MongoDB" class="w-7 h-7"
+                   style="filter: brightness(1) sepia(1) saturate(10) hue-rotate(350deg);" />
             </div>
-            <span class="mt-2 text-white text-sm font-medium">MongoDB</span>
-          </div>
-          <!-- Tailwind -->
-          <div class="flex flex-col items-center">
-            <div class="p-3 rounded-full bg-yellow-500/90 shadow transition-transform duration-300 hover:scale-110">
-              <img src="/icons/tailwind.svg" alt="Tailwind CSS" class="w-7 h-7">
-            </div>
-            <span class="mt-2 text-white text-sm font-medium">Tailwind CSS</span>
-          </div>
-          <!-- JavaScript -->
-          <div class="flex flex-col items-center">
-            <div class="p-3 rounded-full bg-yellow-500/90 shadow transition-transform duration-300 hover:scale-110">
-              <img src="/icons/javascript.svg" alt="JavaScript" class="w-7 h-7">
-            </div>
-            <span class="mt-2 text-white text-sm font-medium">JavaScript</span>
+            <p class="text-sm text-gray-300">MongoDB</p>
           </div>
           <!-- EJS -->
-          <div class="flex flex-col items-center">
-            <div class="p-3 rounded-full bg-yellow-500/90 shadow transition-transform duration-300 hover:scale-110">
-              <img src="/icons/ejs.svg" alt="EJS" class="w-7 h-7">
+          <div class="flex flex-col items-center gap-2">
+            <div class="w-12 h-12 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center">
+              <img src="/icons/ejs.svg" alt="EJS" class="w-7 h-7"
+                   style="filter: brightness(1) sepia(1) saturate(10) hue-rotate(350deg);" />
             </div>
-            <span class="mt-2 text-white text-sm font-medium">EJS</span>
+            <p class="text-sm text-gray-300">EJS</p>
           </div>
-        </div>
-
-        <div class="mt-4 text-gray-300 text-sm">
-          <p>
-            Arquitectura organizada en <span class="font-medium text-white">controladores</span>,
-            <span class="font-medium text-white">repositorios</span>,
-            <span class="font-medium text-white">modelos</span> y
-            <span class="font-medium text-white">reglas de validación</span>,
-            con manejo de errores centralizado y vistas modulares.
-          </p>
-        </div>
-      </div>
-
-      <!-- Solo QR -->
-      <div class="rounded-2xl border border-white/10 bg-white/5 backdrop-blur-sm p-5 text-center">
-        <div class="flex flex-col items-center gap-2">
-          <img
-            src="/img/QR.svg"
-            alt="QR - Sígueme"
-            class="w-48 h-48 md:w-46 md:h-46 rounded-lg border border-white/10 object-cover"
-          />
-          <div>
-            <p class="text-white font-medium leading-tight text-lg">¡Sígueme en LinkedIn!</p>
-            <p class="text-gray-300 text-sm">Escaneá el código para novedades de proyectos.</p>
+          <!-- Tailwind -->
+          <div class="flex flex-col items-center gap-2">
+            <div class="w-12 h-12 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center">
+              <img src="/icons/tailwind.svg" alt="TailwindCSS" class="w-7 h-7"
+                   style="filter: brightness(1) sepia(1) saturate(10) hue-rotate(350deg);" />
+            </div>
+            <p class="text-sm text-gray-300">TailwindCSS</p>
+          </div>
+          <!-- JavaScript -->
+          <div class="flex flex-col items-center gap-2">
+            <div class="w-12 h-12 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center">
+              <img src="/icons/javascript.svg" alt="JavaScript" class="w-7 h-7 text-yellow-400"
+                   style="filter: brightness(1) sepia(1) saturate(10) hue-rotate(350deg);" />
+            </div>
+            <p class="text-sm text-gray-300">JavaScript</p>
           </div>
         </div>
       </div>
-    </aside>
+    </section>
+
+    <!-- QR -->
+    <section class="h-full flex items-center justify-center">
+      <div class="h-full rounded-2xl border border-white/10 bg-white/5 backdrop-blur-sm p-6 text-center flex flex-col items-center justify-center">
+        <header class="mb-2">
+          <h2 class="text-lg sm:text-xl font-semibold text-white">Sígueme</h2>
+          <p class="text-gray-300/90 text-sm">Escaneá el código y enterate de las novedades.</p>
+        </header>
+        <div class="flex items-center justify-center">
+          <img src="/img/QR.svg" alt="QR - Sígueme"
+               class="w-36 h-36 md:w-40 md:h-40 rounded-lg border border-white/10 object-cover" />
+        </div>
+      </div>
+    </section>
+
+    <!-- GitHub -->
+    <section class="h-full">
+      <div class="h-full rounded-2xl border border-white/10 bg-white/5 backdrop-blur-sm p-5 md:p-6 text-center flex flex-col items-center justify-center">
+        <header class="mb-2">
+          <h2 class="text-lg sm:text-xl font-semibold text-white">Código fuente</h2>
+          <p class="text-gray-300/90 text-sm">Repositorio público del proyecto.</p>
+        </header>
+        <a
+          href="<%= typeof githubUrl !== 'undefined' && githubUrl ? githubUrl : 'https://github.com/augustovillegas/Nodo_FS_sp5_entregablefinal.git' %>"
+          target="_blank"
+          class="inline-flex items-center justify-center gap-2 bg-yellow-400 hover:bg-yellow-300 text-black font-semibold px-5 py-2.5 md:px-4 md:py-2 rounded-xl transition w-full sm:w-auto"
+          aria-label="Ver código en GitHub"
+        >
+          <i class="ph ph-github-logo text-xl"></i>
+          Ver código en GitHub
+        </a>
+      </div>
+    </section>
+
   </section>
-
 </div>
+
+<!-- Script externo (toggle de secciones) -->
+<script src="/js/info-toggle.js" defer></script>
