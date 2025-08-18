@@ -3,29 +3,29 @@
    =========================== */
 :root {
   /* Base */
-  --c-bg:        #0f1113; /* negro carbón */
-  --c-bg-2:      #121416; /* negro profundo */
-  --c-panel:     #15181b; /* gris muy oscuro */
-  --c-panel-2:   #1a1e21; /* gris oscuro */
-  --c-line:      #2a2f34; /* gris línea/borde */
-  --c-line-2:    #3a4046; /* gris borde suave */
+  --c-bg: #0f1113; /* negro carbón */
+  --c-bg-2: #121416; /* negro profundo */
+  --c-panel: #15181b; /* gris muy oscuro */
+  --c-panel-2: #1a1e21; /* gris oscuro */
+  --c-line: #2a2f34; /* gris línea/borde */
+  --c-line-2: #3a4046; /* gris borde suave */
 
   /* Texto */
-  --c-text:      #e5e7eb; /* gris claro */
-  --c-text-2:    #cbd5e1; /* gris medio claro */
-  --c-muted:     #94a3b8; /* gris apagado */
-  --c-inverse:   #0a0a0a; /* casi negro para contraste en fondos claros */
+  --c-text: #e5e7eb; /* gris claro */
+  --c-text-2: #cbd5e1; /* gris medio claro */
+  --c-muted: #94a3b8; /* gris apagado */
+  --c-inverse: #0a0a0a; /* casi negro para contraste en fondos claros */
 
   /* Amarillos (mate) */
-  --c-yellow:    #facc15; /* primario (500 aprox) */
-  --c-yellow-600:#eab308; /* hover */
-  --c-yellow-700:#ca8a04; /* foco/borde fuerte */
+  --c-yellow: #facc15; /* primario (500 aprox) */
+  --c-yellow-600: #eab308; /* hover */
+  --c-yellow-700: #ca8a04; /* foco/borde fuerte */
 
   /* Grises para botones/estados */
-  --c-gray-700:  #374151;
-  --c-gray-600:  #4b5563;
-  --c-gray-800:  #1f2937;
-  --c-gray-900:  #111827;
+  --c-gray-700: #374151;
+  --c-gray-600: #4b5563;
+  --c-gray-800: #1f2937;
+  --c-gray-900: #111827;
 
   /* Estados (solo con gris/amarillo) */
   --c-attention-bg: #1a1a1a;
@@ -38,26 +38,47 @@
    =========================== */
 *,
 *::before,
-*::after { box-sizing: border-box; }
+*::after {
+  box-sizing: border-box;
+}
 
-html, body {
+html,
+body {
   margin: 0;
   padding: 0;
   background-color: var(--c-bg);
   color: var(--c-text);
-  font-family: "Roboto", "Inter", "Open Sans", system-ui, -apple-system, Segoe UI, Arial, sans-serif;
+  font-family: "Roboto", "Inter", "Open Sans", system-ui, -apple-system,
+    Segoe UI, Arial, sans-serif;
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 /* Tipos finos por defecto para armonizar con íconos “line thin” */
-body, input, select, textarea, button, table, th, td, label, span, a, p, li {
+body,
+input,
+select,
+textarea,
+button,
+table,
+th,
+td,
+label,
+span,
+a,
+p,
+li {
   font-weight: 300; /* thin */
 }
 
 /* Títulos ligeramente más marcados pero sin perder la línea fina */
-h1, h2, h3, h4, h5, h6 { 
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   font-weight: 400; /* light/regular */
   margin: 0 0 0.5rem 0;
 }
@@ -90,7 +111,8 @@ textarea {
   border: 1px solid var(--c-line);
   padding: 0.6rem 0.8rem;
   border-radius: 8px;
-  transition: border-color .2s ease, background-color .2s ease, box-shadow .2s ease;
+  transition: border-color 0.2s ease, background-color 0.2s ease,
+    box-shadow 0.2s ease;
 }
 
 input::placeholder,
@@ -125,14 +147,15 @@ input[type="button"] {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: .5rem;
+  gap: 0.5rem;
   border: 1px solid transparent;
   border-radius: 8px;
   padding: 0.6rem 1rem;
   font-weight: 400;
   text-decoration: none;
   cursor: pointer;
-  transition: background-color .2s ease, color .2s ease, border-color .2s ease, box-shadow .2s ease;
+  transition: background-color 0.2s ease, color 0.2s ease,
+    border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
 /* Acción principal: amarillo sobre negro para contraste */
@@ -209,8 +232,14 @@ a.danger:focus-visible {
 }
 
 /* Tamaños auxiliares opcionales */
-.btn-sm { padding: .45rem .75rem; border-radius: 6px; }
-.btn-lg { padding: .8rem 1.2rem;  border-radius: 10px; }
+.btn-sm {
+  padding: 0.45rem 0.75rem;
+  border-radius: 6px;
+}
+.btn-lg {
+  padding: 0.8rem 1.2rem;
+  border-radius: 10px;
+}
 
 /* ===========================
    TABLAS
@@ -224,7 +253,8 @@ table {
   overflow: hidden;
 }
 
-th, td {
+th,
+td {
   text-align: center;
   padding: 0.75rem;
   font-weight: 300;
@@ -238,11 +268,15 @@ thead {
 
 thead th {
   text-transform: uppercase;
-  letter-spacing: .02em;
+  letter-spacing: 0.02em;
 }
 
-tbody tr:nth-child(odd)   { background-color: var(--c-panel); }
-tbody tr:nth-child(even)  { background-color: var(--c-panel-2); }
+tbody tr:nth-child(odd) {
+  background-color: var(--c-panel);
+}
+tbody tr:nth-child(even) {
+  background-color: var(--c-panel-2);
+}
 
 tbody tr:hover {
   background-color: #1e2327;
@@ -253,7 +287,9 @@ table a {
   color: var(--c-yellow);
   text-decoration: none;
 }
-table a:hover { text-decoration: underline; }
+table a:hover {
+  text-decoration: underline;
+}
 
 /* ===========================
    ALERTAS (usando grises + amarillo)
@@ -280,19 +316,34 @@ table a:hover { text-decoration: underline; }
 /* ===========================
    UTILIDADES
    =========================== */
-.bg-dark      { background-color: var(--c-panel) !important; }
-.bg-darker    { background-color: var(--c-panel-2) !important; }
-.text-muted   { color: var(--c-muted) !important; }
-.text-strong  { color: var(--c-text) !important; font-weight: 400; }
-.text-yellow  { color: var(--c-yellow) !important; }
-.border-soft  { border-color: var(--c-line) !important; }
-.border-strong{ border-color: var(--c-line-2) !important; }
+.bg-dark {
+  background-color: var(--c-panel) !important;
+}
+.bg-darker {
+  background-color: var(--c-panel-2) !important;
+}
+.text-muted {
+  color: var(--c-muted) !important;
+}
+.text-strong {
+  color: var(--c-text) !important;
+  font-weight: 400;
+}
+.text-yellow {
+  color: var(--c-yellow) !important;
+}
+.border-soft {
+  border-color: var(--c-line) !important;
+}
+.border-strong {
+  border-color: var(--c-line-2) !important;
+}
 
 .badge {
   display: inline-block;
-  padding: .25rem .5rem;
+  padding: 0.25rem 0.5rem;
   border-radius: 999px;
-  font-size: .75rem;
+  font-size: 0.75rem;
   line-height: 1;
   border: 1px solid var(--c-line-2);
   background-color: var(--c-panel-2);
@@ -309,16 +360,16 @@ table a:hover { text-decoration: underline; }
 .pagination {
   display: inline-flex;
   align-items: center;
-  gap: .5rem;
+  gap: 0.5rem;
 }
 .pagination .page {
   background-color: var(--c-gray-800);
   color: var(--c-text);
   border: 1px solid var(--c-line);
-  padding: .45rem .75rem;
+  padding: 0.45rem 0.75rem;
   border-radius: 6px;
   cursor: pointer;
-  transition: background-color .2s ease, border-color .2s ease;
+  transition: background-color 0.2s ease, border-color 0.2s ease;
 }
 .pagination .page:hover {
   background-color: var(--c-gray-700);
@@ -344,9 +395,9 @@ table a:hover { text-decoration: underline; }
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: .75rem;
-  padding-bottom: .75rem;
-  margin-bottom: .75rem;
+  gap: 0.75rem;
+  padding-bottom: 0.75rem;
+  margin-bottom: 0.75rem;
   border-bottom: 1px solid var(--c-line);
 }
 
@@ -357,18 +408,28 @@ a,
 .link {
   color: var(--c-yellow);
   text-decoration: none;
-  transition: color .2s ease, opacity .2s ease;
+  transition: color 0.2s ease, opacity 0.2s ease;
 }
 a:hover,
-.link:hover { opacity: 0.9; }
+.link:hover {
+  opacity: 0.9;
+}
 
 /* ===========================
    HELPERS DE ESPACIADO (opcionales)
    =========================== */
-.m-0  { margin: 0 !important; }
-.mt-0 { margin-top: 0 !important; }
-.mb-0 { margin-bottom: 0 !important; }
-.p-0  { padding: 0 !important; }
+.m-0 {
+  margin: 0 !important;
+}
+.mt-0 {
+  margin-top: 0 !important;
+}
+.mb-0 {
+  margin-bottom: 0 !important;
+}
+.p-0 {
+  padding: 0 !important;
+}
 
 /* ======== Search Group (input + button unificados) ======== */
 .search-group {
@@ -379,7 +440,8 @@ a:hover,
   border: 1px solid var(--c-line);
   border-radius: 10px;
   overflow: hidden; /* evita “saltos” de bordes entre input/botón */
-  transition: border-color .2s ease, box-shadow .2s ease, background-color .2s ease;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease,
+    background-color 0.2s ease;
 }
 
 .search-group:focus-within {
@@ -400,7 +462,7 @@ a:hover,
 
 .search-group .sg-input::placeholder {
   color: var(--c-muted);
-  opacity: .9;
+  opacity: 0.9;
   font-weight: 300;
 }
 
@@ -418,7 +480,7 @@ a:hover,
   color: var(--c-inverse);
   font-weight: 400;
   cursor: pointer;
-  transition: background-color .2s ease, box-shadow .2s ease, color .2s ease;
+  transition: background-color 0.2s ease, box-shadow 0.2s ease, color 0.2s ease;
 }
 
 .search-group .sg-btn:hover {
