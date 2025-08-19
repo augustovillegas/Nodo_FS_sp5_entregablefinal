@@ -48,7 +48,7 @@ app.use((req, res) => {
 });
 
 // ───────────────── cron reset 5 min.
-cron.schedule("*/20 * * * *", async () => {
+cron.schedule("*/5 * * * *", async () => {
   console.log("⏰ [CRON] Ejecutando reset automático cada 5 minutos");
   await resetear();
 });

@@ -1,12 +1,15 @@
-// validationRules.mjs
 import { body } from "express-validator";
 import { hasBadWords } from "../herlpers/badWordsHelper.mjs";
 
 // Expresión regular para detectar emojis
-const emojiRegex =
-  /[\u{1F600}-\u{1F64F}\u{1F300}-\u{1F5FF}\u{1F680}-\u{1F6FF}\u{1F1E6}-\u{1F1FF}]/u;
+const emojiRegex = /[\u{1F600}-\u{1F64F}\u{1F300}-\u{1F5FF}\u{1F680}-\u{1F6FF}\u{1F1E6}-\u{1F1FF}]/u;
 
-  
+// Nueva expresión regular que permite letras, números y espacios
+const alphanumericWithSpacesRegex = /^[A-Za-z0-9\s]+$/;
+
+// Nueva expresión regular que permite solo letras y espacios
+const lettersAndSpacesRegex = /^[A-Za-zÁÉÍÓÚÜÑáéíóúüñ\s]+$/;
+
 console.log("⚙️ [VALID] Middleware de validación cargado.");
 
 /**
@@ -20,12 +23,13 @@ export const validationRules = [
     .isLength({ min: 3, max: 90 })
     .withMessage("nombre oficial debe tener entre 3 y 90 caracteres. Ej: República Argentina")
     .bail()
-    .matches(/^[^\d]+$/)
-    .withMessage("El Nombre oficial no puede contener números.")
+    .custom((value) => lettersAndSpacesRegex.test(value))
+    .withMessage("El Nombre oficial solo puede contener letras y espacios.")
     .bail()
     .custom((value) => !emojiRegex.test(value))
     .withMessage("El nombre oficial no puede contener emoticones.")
-    .custom(hasBadWords) // ✅ Usa la función del helper
+    .bail()
+    .custom(hasBadWords)
     .withMessage("El nombre oficial contiene palabras no permitidas."),
 
   body("capital")
@@ -35,19 +39,20 @@ export const validationRules = [
     .isLength({ min: 3, max: 90 })
     .withMessage("capital debe tener entre 3 y 90 caracteres. Ej: Buenos Aires")
     .bail()
-    .matches(/^[^\d]+$/)
-    .withMessage("La capital no puede contener números.")
+    .custom((value) => lettersAndSpacesRegex.test(value))
+    .withMessage("La capital solo puede contener letras y espacios.")
     .bail()
     .custom((value) => !emojiRegex.test(value))
     .withMessage("La capital no puede contener emoticones.")
-    .custom(hasBadWords) // ✅ Usa la función del helper
+    .bail()
+    .custom(hasBadWords)
     .withMessage("La capital contiene palabras no permitidas."),
 
   body("borders")
     .optional({ nullable: true })
     .custom((value) => !emojiRegex.test(value))
     .withMessage("La/s frontera/s no puede contener emoticones.")
-    .custom(hasBadWords) // ✅ Usa la función del helper
+    .custom(hasBadWords) 
     .withMessage("La/s frontera/s contiene palabras no permitidas.")
     .custom((value) => {
       const list = Array.isArray(value)
@@ -67,7 +72,10 @@ export const validationRules = [
         throw new Error(
           "Cada frontera debe ser un código CCA3 (3 letras mayúsculas). Ej: ARG, BRA"
         );
-      if (hasDuplicates) throw new Error("El campo fronteras no debe contener duplicados. Ej: ARG, ARG");
+      if (hasDuplicates)
+        throw new Error(
+          "El campo fronteras no debe contener duplicados. Ej: ARG, ARG"
+        );
 
       return true;
     }),
@@ -93,10 +101,10 @@ export const validationRules = [
     .withMessage("La población debe ser un entero positivo. Ej: 457800")
     .bail()
     .custom((value) => /^[0-9]+$/.test(value))
-    .withMessage("La población no debe contener letras ni símbolos")
+    .withMessage("La población no debe contener letras ni símbolos.")
     .bail()
     .custom((value) => !emojiRegex.test(String(value)))
-    .withMessage("La población no puede contener emoticones"),
+    .withMessage("La población no puede contener emoticones."),
 
   body("gini")
     .optional({ nullable: true })
@@ -111,16 +119,16 @@ export const validationRules = [
 
   body("timezones")
     .notEmpty()
-    .withMessage("El campo timezone es obligatorio")
+    .withMessage("El campo timezone es obligatorio.")
     .bail()
     .matches(/^UTC[+-][0-1][0-9]:[0-5][0-9]$/)
     .withMessage("timezones debe tener el formato UTC±HH:MM (ej: UTC-03:00)"),
-  
+
   body("flags.svg")
     .optional({ nullable: true })
     .custom((value) => value === "" || /^https?:\/\/.+/.test(value))
     .withMessage("flags.svg debe ser una URL válida (http o https)"),
-  
+
   body("flags.png")
     .optional({ nullable: true })
     .custom((value) => value === "" || /^https?:\/\/.+/.test(value))
@@ -130,11 +138,15 @@ export const validationRules = [
     .notEmpty()
     .withMessage("El campo creador es obligatorio.")
     .bail()
-    .matches(/^[^\d]+$/)
-    .withMessage("El creador no puede contener números.")
+    .isLength({ min: 3, max: 90 })
+    .withMessage("El creador debe tener entre 3 y 90 caracteres. Ej: Juan Pérez")
+    .bail()
+    .custom((value) => lettersAndSpacesRegex.test(value))
+    .withMessage("El creador solo puede contener letras y espacios. Ej: Juan Pérez")
     .bail()
     .custom((value) => !emojiRegex.test(value))
     .withMessage("El creador no puede contener emoticones.")
-    .custom(hasBadWords) // ✅ Usa la función del helper
+    .bail()
+    .custom(hasBadWords)
     .withMessage("El creador contiene palabras no permitidas."),
 ];

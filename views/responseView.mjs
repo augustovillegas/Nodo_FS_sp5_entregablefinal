@@ -3,27 +3,19 @@ export function renderizarPais(pais) {
 
   return {
     id: String(pais._id ?? pais.id ?? ""),
-    name: { official: pais?.name?.official ?? "" },
-
-    // En el modelo "capital" es String, la exponemos como String
+    name: {
+      official: pais?.name?.official ?? ""
+    },
     capital: pais?.capital ?? "Sin Registro",
-
-    // En el modelo "borders" es Array<String>
     borders: Array.isArray(pais?.borders) ? pais.borders : [],
-
-    area: pais?.area ?? null,
-    population: pais?.population ?? null,
-    gini: pais?.gini ?? null,
-
-    // timezones es String con formato tipo "UTC-03:00"
+    area: typeof pais?.area === "number" ? pais.area : null,
+    population: typeof pais?.population === "number" ? pais.population : null,
+    gini: typeof pais?.gini === "number" ? pais.gini : null,
     timezones: pais?.timezones ?? "",
-
-    // flags es un objeto con posibles svg/png (solo incluimos las que existan)
     flags: {
       ...(pais?.flags?.svg ? { svg: pais.flags.svg } : {}),
       ...(pais?.flags?.png ? { png: pais.flags.png } : {}),
     },
-
     creador: pais?.creador ?? "",
     createdAt: pais?.createdAt ?? null,
     updatedAt: pais?.updatedAt ?? null,

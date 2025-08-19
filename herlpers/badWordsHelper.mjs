@@ -1,4 +1,3 @@
-// badWordsHelper.mjs
 import { Filter } from 'bad-words'
 import dotenv from "dotenv";
 

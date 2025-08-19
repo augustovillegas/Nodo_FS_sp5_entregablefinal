@@ -1,7 +1,14 @@
 import mongoose from "mongoose";
 
 const countrySchema = new mongoose.Schema(
-  {
+  {    
+    tipo: {
+      type: String,
+      default: "pais",
+      enum: ["pais"],
+      required: true 
+    },
+
     // name.official: String (3-90) único
     name: {
       official: {
@@ -122,7 +129,7 @@ const countrySchema = new mongoose.Schema(
       },
     },
 
-    // flags: solo nos interesa svg (png opcional por compatibilidad)
+    // flags: prioridad svg (png opcional por compatibilidad)
     flags: {
       svg: {
         type: String,
@@ -143,8 +150,7 @@ const countrySchema = new mongoose.Schema(
         },
       },
     },
-
-    // Por requerimiento del doc
+    
     creador: {
       type: String,
       required: [true, "El campo creador es obligatorio"],
@@ -155,9 +161,15 @@ const countrySchema = new mongoose.Schema(
   },
   {
     timestamps: true,
-    collection: "countries",
+    collection: "Grupo-03", // Modificar para migrar
     strict: true,
-  }
+  } 
 );
 
 export const Country = mongoose.model("Country", countrySchema);
+
+/*
+ timestamps: true,
+    collection: "countries", // Modificar para migrar
+    strict: true,
+*/

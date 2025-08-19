@@ -10,8 +10,9 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   const emojiRegex = /[\p{Extended_Pictographic}\u200D\uFE0F]/u;
-  const letterRegex = /[A-Za-zÁÉÍÓÚÜÑáéíóúüñ]/;
+  const lettersAndSpacesRegex = /^[A-Za-zÁÉÍÓÚÜÑáéíóúüñ\s]+$/;
   const numberRegex = /\d/;
+  const lettersRegex = /[A-Za-zÁÉÍÓÚÜÑáéíóúüñ]/;
 
   function validateField(input) {
     const nameSelector = input.name?.replace(/\./g, '\\.');
@@ -29,44 +30,76 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     if (!msg && val) {
-      if (input.type === 'text') {
+      if (['name.official', 'capital', 'creador'].includes(nm)) {
+        let firstInvalidChar = '';
+        for (const char of val) {
+          if (!lettersAndSpacesRegex.test(char) && char !== ' ') {
+            firstInvalidChar = char;
+            break;
+          }
+        }
+        if (firstInvalidChar) {
+          if (numberRegex.test(firstInvalidChar)) {
+            msg = `No se permiten números. Carácter: '${firstInvalidChar}'`;
+          } else if (emojiRegex.test(firstInvalidChar)) {
+            msg = `No se permiten emoticones. Carácter: '${firstInvalidChar}'`;
+          } else {
+            msg = `Carácter no permitido: '${firstInvalidChar}'. Solo letras y espacios.`;
+          }
+        }
+      } else if (['area', 'population', 'gini'].includes(nm)) {
+        if (lettersRegex.test(val)) {
+            msg = 'No se permiten letras en este campo.';
+        } else if (parseFloat(val) < 0) {
+            msg = 'El valor no puede ser negativo.';
+        } else if (emojiRegex.test(val)) {
+            msg = 'No se permiten emoticones.';
+        }
+        // Validacion especifica para Gini
+        if (nm === 'gini') {
+            const giniValue = parseFloat(val);
+            if (!isNaN(giniValue) && (giniValue < 0 || giniValue > 100)) {
+                msg = 'El campo gini debe estar entre 0 y 100. Ej: 82.1';
+            }
+        }
+      } else if (nm === 'borders') {
+        const codes = val.toUpperCase().split(',').map(s => s.trim());
+        input.value = codes.join(', ');
+
+        const hasInvalidChars = codes.some(c => !lettersRegex.test(c) || c.length !== 3);
+        const hasNumbers = codes.some(c => numberRegex.test(c));
+
+        if (hasInvalidChars || hasNumbers) {
+            msg = 'El campo fronteras no debe contener números, ni caracteres.';
+        } else {
+            const invalid = codes.filter(c => c.length > 0 && !/^[A-Z]{3}$/.test(c));
+            if (invalid.length > 0) {
+                msg = 'Cada frontera debe ser un código CCA3 (3 letras mayúsculas).';
+            } else {
+                const hasDuplicates = new Set(codes).size !== codes.length;
+                if (hasDuplicates) {
+                    msg = 'El campo fronteras no debe contener duplicados. Ej: ARG, ARG';
+                }
+            }
+        }
+      } else if (nm === 'timezones' && !/^UTC[+-][0-1][0-9]:[0-5][0-9]$/.test(val)) {
+        msg = 'timezones debe tener el formato UTC±HH:MM (ej: UTC-03:00)';
+      }
+      
+      if (!msg && input.type === 'text') {
         if (input.minLength > 0 && val.length < input.minLength) {
           msg = `Debe tener al menos ${input.minLength} caracteres.`;
         } else if (input.maxLength >= 0 && val.length > input.maxLength) {
           msg = `No puede superar ${input.maxLength} caracteres.`;
         }
       }
-
-      if (input.type === 'url' && !pattern.test(val)) {
+      
+      if (!msg && input.type === 'url' && !pattern.test(val)) {
         msg = 'Debe ser una URL válida (.svg o .png).';
       }
 
-      if (!msg && input.pattern && !pattern.test(val)) {
+      if (!msg && input.pattern && nm !== 'borders' && !pattern.test(val)) {
         msg = input.title;
-      }
-
-      if (!msg) {
-        if (['name.official', 'capital', 'creador'].includes(nm)) {
-          if (numberRegex.test(val)) {
-            msg = 'No se permiten números en este campo.';
-          } else if (emojiRegex.test(val)) {
-            msg = 'No se permiten emoticones.';
-          }
-        } else if (['area', 'population', 'gini'].includes(nm)) {
-          if (letterRegex.test(val)) {
-            msg = 'No se permiten letras en este campo.';
-          } else if (emojiRegex.test(val)) {
-            msg = 'No se permiten emoticones.';
-          }
-        } else if (nm === 'borders') {
-          const codes = val.split(',').map(s => s.trim());
-          const invalid = codes.filter(c => !/^[A-Z]{3}$/.test(c));
-          if (invalid.length > 0) {
-            msg = 'Cada border debe ser un código CCA3 (3 letras mayúsculas).';
-          }
-        } else if (nm === 'timezones' && !/^UTC[+-][0-1][0-9]:[0-5][0-9]$/.test(val)) {
-          msg = 'timezones debe tener el formato UTC±HH:MM (ej: UTC-03:00)';
-        }
       }
     }
 

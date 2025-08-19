@@ -3,8 +3,8 @@ import { IRepository } from "./IRespository.mjs";
 
 class CountryRepository extends IRepository {
   async obtenerTodos() {
-    console.log("📚 [REPO] find all");
-    return await Country.find({});
+    console.log("📚 [REPO] find all (tipo: pais)");
+    return await Country.find({ tipo: "pais"});
   }
 
   async obtenerPorId(id) {

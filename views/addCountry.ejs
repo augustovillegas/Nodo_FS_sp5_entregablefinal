@@ -21,8 +21,9 @@
         required
         autocomplete="off"
         minlength="3"
-        maxlength="90"        
+        maxlength="90"     
         placeholder="Ej: República de Testlandia"
+        autocomplete="off"
         value="<%= get('name.official') %>"
         class="w-full px-3 py-2 border rounded-md bg-inherit text-white focus:outline-none focus:ring-2 focus:ring-yellow-500 <%= errors.find(e => e.param === 'name.official') ? 'border-red-600 ring-2 ring-red-500' : '' %>"
       />
@@ -44,6 +45,7 @@
         minlength="3"
         maxlength="90"        
         placeholder="Ej: Testópolis"
+        autocomplete="off"
         value="<%= get('capital') %>"
         class="w-full px-3 py-2 border rounded-md bg-inherit text-white focus:outline-none focus:ring-2 focus:ring-yellow-500 <%= errors.find(e => e.param === 'capital') ? 'border-red-600 ring-2 ring-red-500' : '' %>"
       />
@@ -61,8 +63,8 @@
         name="borders"
         type="text"
         autocomplete="off"
-        pattern="^([A-Z]{3})(,\s*[A-Z]{3})*$"        
         placeholder="Ej: ARG, CHL, URY"
+        autocomplete="off"
         value="<%= get('borders') %>"
         class="w-full px-3 py-2 border rounded-md bg-inherit text-white focus:outline-none focus:ring-2 focus:ring-yellow-500 <%= errors.find(e => e.param === 'borders') ? 'border-red-600 ring-2 ring-red-500' : '' %>"
       />
@@ -84,6 +86,7 @@
         autocomplete="off"
         pattern="^[0-9]+(\.[0-9]+)?$"        
         placeholder="Ej: 2780400"
+        autocomplete="off"
         value="<%= get('area') %>"
         class="w-full px-3 py-2 border rounded-md bg-inherit text-white focus:outline-none focus:ring-2 focus:ring-yellow-500 <%= errors.find(e => e.param === 'area') ? 'border-red-600 ring-2 ring-red-500' : '' %>"
       />
@@ -105,6 +108,7 @@
         autocomplete="off"
         pattern="^[0-9]+$"        
         placeholder="Ej: 45195777"
+        autocomplete="off"
         value="<%= get('population') %>"
         class="w-full px-3 py-2 border rounded-md bg-inherit text-white focus:outline-none focus:ring-2 focus:ring-yellow-500 <%= errors.find(e => e.param === 'population') ? 'border-red-600 ring-2 ring-red-500' : '' %>"
       />
@@ -123,8 +127,9 @@
         type="text"
         inputmode="decimal"
         autocomplete="off"
-        pattern="^[0-9]+(\.[0-9]+)?$"        
+        pattern="^[0-9]+(\.[0-9]+)?$"     
         placeholder="Ej: 45.6"
+        autocomplete="off"
         value="<%= get('gini') %>"
         class="w-full px-3 py-2 border rounded-md bg-inherit text-white focus:outline-none focus:ring-2 focus:ring-yellow-500 <%= errors.find(e => e.param === 'gini') ? 'border-red-600 ring-2 ring-red-500' : '' %>"
       />
@@ -143,8 +148,9 @@
         type="text"
         required
         autocomplete="off"
-        pattern="^UTC[+-][0-1][0-9]:[0-5][0-9]$"        
+        pattern="^UTC[+-][0-1][0-9]:[0-5][0-9]$"   
         placeholder="Ej: UTC-03:00"
+        autocomplete="off"
         value="<%= get('timezones') %>"
         class="w-full px-3 py-2 border rounded-md bg-inherit text-white focus:outline-none focus:ring-2 focus:ring-yellow-500 <%= errors.find(e => e.param === 'timezones') ? 'border-red-600 ring-2 ring-red-500' : '' %>"
       />
@@ -162,6 +168,7 @@
         name="flags"
         type="text"
         placeholder="Ej: https://.../bandera.png o .svg"
+        autocomplete="off"
         value="<%= get('flags') %>"
         class="w-full px-3 py-2 border rounded-md bg-inherit text-white focus:outline-none focus:ring-2 focus:ring-yellow-500 <%= errors.find(e => e.param === 'flags') ? 'border-red-600 ring-2 ring-red-500' : '' %>"
       />
@@ -183,6 +190,7 @@
         minlength="3"
         maxlength="90"        
         placeholder="Ej: Augusto Villegas"
+        autocomplete="off"
         value="<%= get('creador') %>"
         class="w-full px-3 py-2 border rounded-md bg-inherit text-white focus:outline-none focus:ring-2 focus:ring-yellow-500 <%= errors.find(e => e.param === 'creador') ? 'border-red-600 ring-2 ring-red-500' : '' %>"
       />

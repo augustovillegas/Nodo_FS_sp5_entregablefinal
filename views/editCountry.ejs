@@ -3,7 +3,7 @@
 
   <form
     id="country-form"
-    action="/api/countries/<%= countryId %>?_method=PUT"
+    action="/api/countries/<%= countryId %>/editar?_method=PUT"
     method="POST"
     novalidate
     class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-12 gap-y-6"
@@ -14,7 +14,6 @@
       const flagErr = findErr('flags.svg') || findErr('flags.png');
     %>
 
-    <!-- Nombre oficial -->
     <div>
       <label for="officialName" class="block text-sm font-semibold mb-1">
         Nombre oficial <span class="text-yellow-500">*</span>
@@ -28,6 +27,7 @@
         maxlength="90"
         title="No se permiten números ni emoticones."
         placeholder="Ej: República de Testlandia"
+        autocomplete="off"
         value="<%= get('name.official', country?.name?.official) %>"
         class="w-full px-3 py-2 border rounded-md bg-inherit text-white focus:outline-none focus:ring-2 focus:ring-yellow-500 <%= findErr('name.official') ? 'border-red-600 ring-2 ring-red-500' : '' %>"
       />
@@ -36,7 +36,6 @@
       </p>
     </div>
 
-    <!-- Capital -->
     <div>
       <label for="capital" class="block text-sm font-semibold mb-1">
         Capital <span class="text-yellow-500">*</span>
@@ -50,6 +49,7 @@
         maxlength="90"
         title="No se permiten números ni emoticones."
         placeholder="Ej: Testópolis"
+        autocomplete="off"
         value="<%= get('capital', country?.capital) %>"
         class="w-full px-3 py-2 border rounded-md bg-inherit text-white focus:outline-none focus:ring-2 focus:ring-yellow-500 <%= findErr('capital') ? 'border-red-600 ring-2 ring-red-500' : '' %>"
       />
@@ -58,7 +58,6 @@
       </p>
     </div>
 
-    <!-- Fronteras -->
     <div>
       <label for="borders" class="block text-sm font-semibold mb-1">
         Fronteras (separados por comas)
@@ -67,9 +66,9 @@
         id="borders"
         name="borders"
         type="text"
-        pattern="^([A-Z]{3})(,\s*[A-Z]{3})*$"
         title="Debe ser una lista separada por coma de códigos CCA3 (ej: ARG, BRA, URY)"
         placeholder="Ej: ARG, CHL, URY"
+        autocomplete="off"
         value="<%= Array.isArray(get('borders', country?.borders)) ? get('borders', country?.borders).join(', ') : get('borders', '') %>"
         class="w-full px-3 py-2 border rounded-md bg-inherit text-white focus:outline-none focus:ring-2 focus:ring-yellow-500 <%= findErr('borders') ? 'border-red-600 ring-2 ring-red-500' : '' %>"
       />
@@ -78,7 +77,6 @@
       </p>
     </div>
 
-    <!-- Área -->
     <div>
       <label for="area" class="block text-sm font-semibold mb-1">
         Área (km²) <span class="text-yellow-500">*</span>
@@ -92,6 +90,7 @@
         pattern="^[0-9]+(\.[0-9]+)?$"
         title="Debe ser un número positivo. Ej: 2780400"
         placeholder="Ej: 2780400"
+        autocomplete="off"
         value="<%= get('area', country?.area) %>"
         class="w-full px-3 py-2 border rounded-md bg-inherit text-white focus:outline-none focus:ring-2 focus:ring-yellow-500 <%= findErr('area') ? 'border-red-600 ring-2 ring-red-500' : '' %>"
       />
@@ -100,7 +99,6 @@
       </p>
     </div>
 
-    <!-- Población -->
     <div>
       <label for="population" class="block text-sm font-semibold mb-1">
         Población <span class="text-yellow-500">*</span>
@@ -114,6 +112,7 @@
         pattern="^[0-9]+$"
         title="Debe ser un número entero positivo. Ej: 45195777"
         placeholder="Ej: 45195777"
+        autocomplete="off"
         value="<%= get('population', country?.population) %>"
         class="w-full px-3 py-2 border rounded-md bg-inherit text-white focus:outline-none focus:ring-2 focus:ring-yellow-500 <%= findErr('population') ? 'border-red-600 ring-2 ring-red-500' : '' %>"
       />
@@ -122,7 +121,6 @@
       </p>
     </div>
 
-    <!-- Gini -->
     <div>
       <label for="gini" class="block text-sm font-semibold mb-1">
         Índice Gini
@@ -135,8 +133,9 @@
         pattern="^[0-9]+(\.[0-9]+)?$"
         min="0"
         max="100"
-        placeholder="Ej: 45.6"
         title="Debe estar entre 0 y 100"
+        placeholder="Ej: 45.6"
+        autocomplete="off"
         value="<%= get('gini', country?.gini) %>"
         class="w-full px-3 py-2 border rounded-md bg-inherit text-white focus:outline-none focus:ring-2 focus:ring-yellow-500 <%= findErr('gini') ? 'border-red-600 ring-2 ring-red-500' : '' %>"
       />
@@ -145,7 +144,6 @@
       </p>
     </div>
 
-    <!-- Zona horaria -->
     <div>
       <label for="timezones" class="block text-sm font-semibold mb-1">
         Zona horaria <span class="text-yellow-500">*</span>
@@ -158,6 +156,7 @@
         pattern="^UTC[+-][0-1][0-9]:[0-5][0-9]$"
         title="Formato requerido: UTC±HH:MM (Ej: UTC-03:00)"
         placeholder="Ej: UTC-03:00"
+        autocomplete="off"
         value="<%= get('timezones', country?.timezones) %>"
         class="w-full px-3 py-2 border rounded-md bg-inherit text-white focus:outline-none focus:ring-2 focus:ring-yellow-500 <%= findErr('timezones') ? 'border-red-600 ring-2 ring-red-500' : '' %>"
       />
@@ -166,18 +165,17 @@
       </p>
     </div>
 
-    <!-- Bandera -->
     <div>
       <label for="flagUrl" class="block text-sm font-semibold mb-1">
         Bandera (URL .svg o .png)
       </label>
       <input
         id="flagUrl"
-        name="flagUrl"
+        name="flags"
         type="text"
         autocomplete="off"
         pattern="^https?:\/\/.*\.(svg|png)$"
-        title="Debe ser una URL válida (http o https). No se permiten emoticones."
+        title="Debe ser una URL válida (.svg o .png)"
         placeholder="https://ejemplo.com/bandera.svg o bandera.png"
         value="<%= get('flags.svg', country?.flags?.svg) || get('flags.png', country?.flags?.png) %>"
         class="w-full px-3 py-2 border rounded-md bg-inherit text-white focus:outline-none focus:ring-2 <%= flagErr ? 'ring-red-500 border-red-600' : 'ring-yellow-500 border-gray-600' %>"
@@ -189,7 +187,6 @@
       </p>
     </div>
 
-    <!-- Creador -->
     <div>
       <label for="creador" class="block text-sm font-semibold mb-1">
         Creador <span class="text-yellow-500">*</span>
@@ -201,8 +198,8 @@
         required
         minlength="3"
         maxlength="90"
-        pattern="^[^\d\u{1F600}-\u{1F6FF}]*$"
         title="No se permiten números ni emoticones."
+        autocomplete="off"
         placeholder="Ej: Augusto Villegas"
         value="<%= get('creador', country?.creador) %>"
         class="w-full px-3 py-2 border rounded-md bg-inherit text-white focus:outline-none focus:ring-2 focus:ring-yellow-500 <%= findErr('creador') ? 'border-red-600 ring-2 ring-red-500' : '' %>"
@@ -212,9 +209,8 @@
       </p>
     </div>
 
-    <!-- Acciones -->
     <div class="lg:col-span-3 flex justify-end mt-6">
-      <%- include('partials/form-actions', { submitLabel: 'Actualizar', cancelHref: '/api/countries' }) %>
+      <%- include('partials/form-actions', { submitLabel: 'Actualizar', cancelHref: '/api/countries/' }) %>
     </div>
   </form>
 
