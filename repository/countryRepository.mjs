@@ -2,8 +2,7 @@ import { Country } from "../models/country.mjs";
 import { IRepository } from "./IRespository.mjs";
 
 class CountryRepository extends IRepository {
-  async obtenerTodos() {
-    console.log("📚 [REPO] find all (tipo: pais)");
+  async obtenerTodos() {console.log("📚 [REPO] find all (tipo: pais)");
     return await Country.find({ tipo: "pais"});
   }
 

@@ -32,7 +32,7 @@ export const handleErrors = () => (req, res, next) => {
       errors: errors.array(),
       old,
       country: isEditing ? { _id: req.params.id, ...req.body } : undefined,
-      countryId: req.params.id, // útil para editar
+      countryId: req.params.id, 
       title: isEditing ? "Editar país" : "Agregar país"
     };
     return res.status(400).render(view, payload);

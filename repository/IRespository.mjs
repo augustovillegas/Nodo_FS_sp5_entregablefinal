@@ -16,7 +16,7 @@ class IRepository {
    * @param {string} id
    * @returns {Promise<any|null>}
    */
-  obtenerPorId(id) { // eslint-disable-line no-unused-vars
+  obtenerPorId(id) { 
     throw new Error("Método 'obtenerPorId(id)' no implementado");
   }
 
@@ -25,7 +25,7 @@ class IRepository {
    * @param {object} data
    * @returns {Promise<any>}
    */
-  crear(data) { // eslint-disable-line no-unused-vars
+  crear(data) { 
     throw new Error("Método 'crear(data)' no implementado");
   }
 
@@ -35,7 +35,7 @@ class IRepository {
    * @param {object} data
    * @returns {Promise<any|null>}
    */
-  actualizar(id, data) { // eslint-disable-line no-unused-vars
+  actualizar(id, data) { 
     throw new Error("Método 'actualizar(id, data)' no implementado");
   }
 
@@ -44,7 +44,7 @@ class IRepository {
    * @param {string} id
    * @returns {Promise<any|null>}
    */
-  eliminar(id) { // eslint-disable-line no-unused-vars
+  eliminar(id) { 
     throw new Error("Método 'eliminar(id)' no implementado");
   } 
 }

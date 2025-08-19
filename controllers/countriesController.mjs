@@ -77,8 +77,7 @@ export const crearPaisController = async (req, res) => {
   } catch (error) {
     console.error("❌ Error al crear país:", error);
 
-    if (req.accepts("json")) {
-      // 🔧 Respuesta más completa en caso de error
+    if (req.accepts("json")) {      
       return res.status(400).json({
         mensaje: "Error al crear país",
         error: error.message,
@@ -116,8 +115,7 @@ export const formularioEditarPaisController = async (req, res) => {
         old: {}
       });
     }
-
-    // Para que la vista actual no rompa, pasamos también countryId
+    
     return res.render("editCountry", {
       errors: [],
       old: {},

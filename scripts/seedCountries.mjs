@@ -136,7 +136,7 @@ export const syncCountries = async () => {
     const doc = normalize(item);
 
     try {
-      await new Country(doc).validate(); // Validación completa
+      await new Country(doc).validate(); 
     } catch (e) {
       console.warn(`⚠️  [SEED] Validación fallida para ${doc?.name?.official}:`, e.message);
       skipped++;

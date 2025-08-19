@@ -1,7 +1,7 @@
 import countryRepository from "../repository/countryRepository.mjs";
 import { Parser } from "json2csv";
 
-// 🔧 Normaliza el campo name si viene como string plano
+// Normaliza el campo name si viene como string plano
 const normalizarNombre = (data) => {
   if (typeof data?.name === "string") {
     data.name = { official: data.name.trim() };
