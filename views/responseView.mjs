@@ -2,6 +2,8 @@ export function renderizarPais(pais) {
   if (!pais) return null;
 
   return {
+    Collection: "pais",
+    tipo: pais?.tipo ?? "pais",
     id: String(pais._id ?? pais.id ?? ""),
     name: {
       official: pais?.name?.official ?? ""
