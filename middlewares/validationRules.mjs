@@ -49,6 +49,7 @@ export const validationRules = [
     .withMessage("La capital contiene palabras no permitidas."),
 
   body("borders")
+    .customSanitizer(value => value === '' ? undefined : value)
     .optional({ nullable: true })
     .custom((value) => !emojiRegex.test(value))
     .withMessage("La/s frontera/s no puede contener emoticones.")
@@ -95,7 +96,7 @@ export const validationRules = [
 
   body("population")
     .notEmpty()
-    .withMessage("La población es obligatoria")
+    .withMessage("La población es obligatoria.")
     .bail()
     .isInt({ gt: 0 })
     .withMessage("La población debe ser un entero positivo. Ej: 457800")
@@ -107,6 +108,7 @@ export const validationRules = [
     .withMessage("La población no puede contener emoticones."),
 
   body("gini")
+    .customSanitizer(value => value === '' ? undefined : value)
     .optional({ nullable: true })
     .isFloat({ min: 0, max: 100 })
     .withMessage("El campo gini debe estar entre 0 y 100. Ej: 82.1")
