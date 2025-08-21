@@ -2,7 +2,8 @@ import { body } from "express-validator";
 import { hasBadWords } from "../herlpers/badWordsHelper.mjs";
 
 // Expresión regular para detectar emojis
-const emojiRegex = /[\u{1F600}-\u{1F64F}\u{1F300}-\u{1F5FF}\u{1F680}-\u{1F6FF}\u{1F1E6}-\u{1F1FF}]/u;
+const emojiRegex =
+  /[\u{1F600}-\u{1F64F}\u{1F300}-\u{1F5FF}\u{1F680}-\u{1F6FF}\u{1F1E6}-\u{1F1FF}]/u;
 
 // Nueva expresión regular que permite letras, números y espacios
 const alphanumericWithSpacesRegex = /^[A-Za-z0-9\s]+$/;
@@ -16,6 +17,13 @@ console.log("⚙️ [VALID] Middleware de validación cargado.");
  * Middleware de validación para crear o actualizar países
  */
 export const validationRules = [
+  
+  body("name")
+  .customSanitizer((v) => {
+    if (typeof v === "string") return { official: v.trim() };
+    return v;
+  }),
+
   body("name.official")
     .notEmpty()
     .withMessage("El campo nombre oficial es obligatorio.")
@@ -49,11 +57,11 @@ export const validationRules = [
     .withMessage("La capital contiene palabras no permitidas."),
 
   body("borders")
-    .customSanitizer(value => value === '' ? undefined : value)
+    .customSanitizer((value) => (value === "" ? undefined : value))
     .optional({ nullable: true })
     .custom((value) => !emojiRegex.test(value))
     .withMessage("La/s frontera/s no puede contener emoticones.")
-    .custom(hasBadWords) 
+    .custom(hasBadWords)
     .withMessage("La/s frontera/s contiene palabras no permitidas.")
     .custom((value) => {
       const list = Array.isArray(value)
@@ -108,7 +116,7 @@ export const validationRules = [
     .withMessage("La población no puede contener emoticones."),
 
   body("gini")
-    .customSanitizer(value => value === '' ? undefined : value)
+    .customSanitizer((value) => (value === "" ? undefined : value))
     .optional({ nullable: true })
     .isFloat({ min: 0, max: 100 })
     .withMessage("El campo gini debe estar entre 0 y 100. Ej: 82.1")
@@ -141,10 +149,14 @@ export const validationRules = [
     .withMessage("El campo creador es obligatorio.")
     .bail()
     .isLength({ min: 3, max: 90 })
-    .withMessage("El creador debe tener entre 3 y 90 caracteres. Ej: Juan Pérez")
+    .withMessage(
+      "El creador debe tener entre 3 y 90 caracteres. Ej: Juan Pérez"
+    )
     .bail()
     .custom((value) => lettersAndSpacesRegex.test(value))
-    .withMessage("El creador solo puede contener letras y espacios. Ej: Juan Pérez")
+    .withMessage(
+      "El creador solo puede contener letras y espacios. Ej: Juan Pérez"
+    )
     .bail()
     .custom((value) => !emojiRegex.test(value))
     .withMessage("El creador no puede contener emoticones.")

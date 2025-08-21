@@ -1,14 +1,6 @@
 import countryRepository from "../repository/countryRepository.mjs";
 import { Parser } from "json2csv";
 
-// Normaliza el campo name si viene como string plano
-const normalizarNombre = (data) => {
-  if (typeof data?.name === "string") {
-    data.name = { official: data.name.trim() };
-  }
-  return data;
-};
-
 export const obtenerTodosLosPaises = async () => {
   console.log("🧠 [SRV] obtenerTodosLosPaises()");
   return await countryRepository.obtenerTodos();
@@ -24,16 +16,22 @@ export const obtenerPaisPorNombreOficial = async (nombreOficial) => {
   return await countryRepository.obtenerPorNombreOficial(nombreOficial);
 };
 
-export const crearPais = async (data) => {
-  const normalizado = normalizarNombre(data);
-  console.log("🧠 [SRV] crearPais() con:", normalizado?.name?.official);
-  return await countryRepository.crear(normalizado);
+export const crearPais = async (data) => {  
+  console.log("🧠 [SRV] crearPais() con:", data?.name?.official);
+  const paisExistente = await countryRepository.obtenerPorNombreOficial(data.name.official);
+  if (paisExistente) {
+    throw new Error("El país ingresado ya existe.");
+  }
+  return await countryRepository.crear(data);
 };
 
-export const actualizarPais = async (id, data) => {
-  const normalizado = normalizarNombre(data);
-  console.log("🧠 [SRV] actualizarPais() con:", normalizado?.name?.official);
-  return await countryRepository.actualizar(id, normalizado);
+export const actualizarPais = async (id, data) => {  
+  console.log("🧠 [SRV] actualizarPais() con:", data?.name?.official);
+  const paisExistente = await countryRepository.obtenerPorNombreOficial(data.name.official);  
+  if (paisExistente && String(paisExistente._id) !== String(id)) {
+    throw new Error("El nombre oficial ya existe en otro país.");
+  }
+  return await countryRepository.actualizar(id, data);
 };
 
 export const eliminarPais = async (id) => {
