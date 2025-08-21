@@ -17,14 +17,12 @@ console.log("⚙️ [VALID] Middleware de validación cargado.");
  * Middleware de validación para crear o actualizar países
  */
 export const validationRules = [
-  
-  body("name")
-  .customSanitizer((v) => {
-    if (typeof v === "string") return { official: v.trim() };
-    return v;
-  }),
 
   body("name.official")
+    .customSanitizer((v) => {
+      if (typeof v === "string") return { official: v.trim() };
+      return v;
+    })
     .notEmpty()
     .withMessage("El campo nombre oficial es obligatorio.")
     .bail()
@@ -39,7 +37,7 @@ export const validationRules = [
     .bail()
     .custom(hasBadWords)
     .withMessage("El nombre oficial contiene palabras no permitidas."),
-
+   
   body("capital")
     .notEmpty()
     .withMessage("El campo capital es obligatorio.")
