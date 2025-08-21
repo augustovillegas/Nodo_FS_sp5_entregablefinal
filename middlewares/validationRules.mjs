@@ -2,13 +2,9 @@ import { body } from "express-validator";
 import { hasBadWords } from "../herlpers/badWordsHelper.mjs";
 
 // Expresión regular para detectar emojis
-const emojiRegex =
-  /[\u{1F600}-\u{1F64F}\u{1F300}-\u{1F5FF}\u{1F680}-\u{1F6FF}\u{1F1E6}-\u{1F1FF}]/u;
+const emojiRegex = /[\u{1F600}-\u{1F64F}\u{1F300}-\u{1F5FF}\u{1F680}-\u{1F6FF}\u{1F1E6}-\u{1F1FF}]/u;
 
-// Nueva expresión regular que permite letras, números y espacios
-const alphanumericWithSpacesRegex = /^[A-Za-z0-9\s]+$/;
-
-// Nueva expresión regular que permite solo letras y espacios
+// Expresión regular que permite solo letras y espacios
 const lettersAndSpacesRegex = /^[A-Za-zÁÉÍÓÚÜÑáéíóúüñ\s]+$/;
 
 console.log("⚙️ [VALID] Middleware de validación cargado.");
@@ -16,14 +12,10 @@ console.log("⚙️ [VALID] Middleware de validación cargado.");
 /**
  * Middleware de validación para crear o actualizar países
  */
-export const validationRules = [
+export const validationRules = [  
 
-  body("name.official")
-    .customSanitizer((v) => {
-      if (typeof v === "string") return { official: v.trim() };
-      return v;
-    })
-    .notEmpty()
+  body("name.official")  
+    .notEmpty()    
     .withMessage("El campo nombre oficial es obligatorio.")
     .bail()
     .isLength({ min: 3, max: 90 })
@@ -37,7 +29,7 @@ export const validationRules = [
     .bail()
     .custom(hasBadWords)
     .withMessage("El nombre oficial contiene palabras no permitidas."),
-   
+
   body("capital")
     .notEmpty()
     .withMessage("El campo capital es obligatorio.")

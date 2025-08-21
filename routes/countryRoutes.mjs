@@ -11,6 +11,7 @@ import {
 } from "../controllers/countriesController.mjs";
 import { validationRules } from "../middlewares/validationRules.mjs";
 import { handleErrors } from "../middlewares/handleErros.mjs";
+import { normalizarNombre } from "../middlewares/nomalizarNombre.mjs";
 
 const router = express.Router();
 
@@ -21,13 +22,13 @@ router.get("/countries", obtenerTodosLosPaisesController);
 router.get("/countries/agregar", formularioAgregarPaisController);
 
 // Procesar creación
-router.post("/countries/agregar", validationRules, handleErrors(), crearPaisController);
+router.post("/countries/agregar", normalizarNombre, validationRules, handleErrors(), crearPaisController);
 
 // Mostrar formulario de edición
 router.get("/countries/:id/editar", formularioEditarPaisController);
 
 // Procesar actualización
-router.put("/countries/:id/editar", validationRules, handleErrors(), actualizarPaisController);
+router.put("/countries/:id/editar", normalizarNombre, validationRules, handleErrors(), actualizarPaisController);
 
 // Eliminar por ID
 router.delete("/countries/:id", eliminarPaisController);
