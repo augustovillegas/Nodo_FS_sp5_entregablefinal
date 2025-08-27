@@ -46,7 +46,7 @@ export const validationRules = [
     .custom(hasBadWords)
     .withMessage("La capital contiene palabras no permitidas."),
 
-  body("borders")
+  body("borders")    
     .customSanitizer((value) => (value === "" ? undefined : value))
     .optional({ nullable: true })
     .custom((value) => !emojiRegex.test(value))

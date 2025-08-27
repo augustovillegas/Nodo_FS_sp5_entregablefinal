@@ -36,7 +36,7 @@ const countrySchema = new mongoose.Schema(
     borders: {
       type: [String],
       default: [],
-
+/*
       set: (value) => {
         const list = Array.isArray(value)
           ? value
@@ -73,9 +73,9 @@ const countrySchema = new mongoose.Schema(
           message: "borders no debe contener duplicados",
         },
       ],
-    },
-
+    },*/
     // area: Number (positivo)
+},
     area: {
       type: Number,
       required: [true, "El área es obligatoria"],
