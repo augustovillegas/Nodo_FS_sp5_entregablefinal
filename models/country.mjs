@@ -1,12 +1,12 @@
 import mongoose from "mongoose";
 
 const countrySchema = new mongoose.Schema(
-  {    
+  {
     tipo: {
       type: String,
       default: "pais",
       enum: ["pais"],
-      required: true 
+      required: true,
     },
 
     // name.official: String (3-90) único
@@ -36,10 +36,11 @@ const countrySchema = new mongoose.Schema(
     borders: {
       type: [String],
       default: [],
-/*
       set: (value) => {
         const list = Array.isArray(value)
           ? value
+          : typeof value === "string"
+          ? value.split(",")
           : value == null
           ? []
           : [value];
@@ -52,7 +53,6 @@ const countrySchema = new mongoose.Schema(
           .filter(Boolean);
         return Array.from(new Set(normalized));
       },
-
       validate: [
         {
           validator: function (arr) {
@@ -73,9 +73,7 @@ const countrySchema = new mongoose.Schema(
           message: "borders no debe contener duplicados",
         },
       ],
-    },*/
-    // area: Number (positivo)
-},
+    },
     area: {
       type: Number,
       required: [true, "El área es obligatoria"],
@@ -150,7 +148,7 @@ const countrySchema = new mongoose.Schema(
         },
       },
     },
-    
+
     creador: {
       type: String,
       required: [true, "El campo creador es obligatorio"],
@@ -163,7 +161,7 @@ const countrySchema = new mongoose.Schema(
     timestamps: true,
     collection: "Grupo-03", // Modificar para migrar
     strict: true,
-  } 
+  }
 );
 
 export const Country = mongoose.model("Country", countrySchema);
