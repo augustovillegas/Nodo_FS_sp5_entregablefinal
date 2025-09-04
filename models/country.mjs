@@ -159,15 +159,10 @@ const countrySchema = new mongoose.Schema(
   },
   {
     timestamps: true,
-    collection: "Grupo-03", // Modificar para migrar
+    collection: "countries", 
     strict: true,
   }
 );
 
 export const Country = mongoose.model("Country", countrySchema);
 
-/*
- timestamps: true,
-    collection: "countries", // Modificar para migrar
-    strict: true,
-*/
